@@ -1,6 +1,5 @@
 package userInterface;
 
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -9,14 +8,12 @@ import javax.swing.JOptionPane;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 
 import javax.swing.SwingConstants;
 
 import backend.EnvironmentVerifier;
 import backend.LoginBackend;
 
-import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JPasswordField;
 
@@ -40,7 +37,9 @@ public class LoginWindow {
 	private EnvironmentVerifier environmentVerifier;
 
 	/**
-	 * Create the application.
+	 * Verify that the user has an AppData folder. If they do not, close the program.
+	 * If they do and initial account setup is needed, generate the user's profile. 
+	 * Shows the login window after setup, if needed.
 	 */
 	public LoginWindow() {
 		this.frmJkeeperPasswordManager = new JFrame();
@@ -60,7 +59,7 @@ public class LoginWindow {
 	}
 	
 	/**
-	 * Initialize the contents of the frame.
+	 * Generate the needed user interface
 	 */
 	private void initialize() {
 		this.loginBackend = new LoginBackend();
@@ -88,6 +87,8 @@ public class LoginWindow {
 		JButton btnLogin = new JButton("Login");
 		btnLogin.setBounds(142, 154, 97, 23);
 		frmJkeeperPasswordManager.getContentPane().add(btnLogin);
+		
+		// Prompt the user for their login password
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
 				if(pwdPasswordField.getPassword().length == 0){

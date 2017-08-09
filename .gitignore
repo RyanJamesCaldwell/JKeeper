@@ -3,3 +3,4 @@
 /.recommenders
 /jKeeper/.project
 /jKeeper/.classpath
+/jKeeper/target/*
