@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
  */
 public class EnvironmentVerifier {
 	
+	// User's account profile
 	private File userProfile;
 	private File appDataFolder;
 	private PrintWriter fileWriter;
