@@ -3,4 +3,4 @@
 /.recommenders
 /jKeeper/.project
 /jKeeper/.classpath
-/jKeeper/target/*
+/jKeeper/target/classes/META-INF/maven/org.caldwell/jKeeper/pom.properties
