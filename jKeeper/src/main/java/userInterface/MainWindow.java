@@ -37,12 +37,14 @@ public class MainWindow {
 	private JFrame mainWindow;
 	// The back end operations of the main window
 	private MainWindowBackend mainWindowBackend;
+	private DefaultListModel itemList;
 
 	/**
 	 * Initializes the user interface and sets the visibility of the window to "true"
 	 */
 	public MainWindow() {
 		initialize();
+		populateItemList();
 		this.mainWindow.setVisible(true);
 	}
 
@@ -57,14 +59,14 @@ public class MainWindow {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(183, 28, 464, 269);
+		scrollPane.setBounds(183, 0, 464, 254);
 		mainWindow.getContentPane().add(scrollPane);
 		
-		DefaultListModel listItems = new DefaultListModel();
-		listItems.addElement("GMail account");
-		listItems.addElement("Yahoo email");
+		itemList = new DefaultListModel();
+		itemList.addElement("GMail account");
+		itemList.addElement("Yahoo email");
 		
-		JList list = new JList(listItems);
+		JList list = new JList(itemList);
 		list.setBackground(SystemColor.text);
 		scrollPane.setViewportView(list);
 		
@@ -86,6 +88,18 @@ public class MainWindow {
 		lblPasswordTypes.setBounds(0, 11, 183, 24);
 		mainWindow.getContentPane().add(lblPasswordTypes);
 		
+		JButton btnAddEntry = new JButton("Add Entry");
+		btnAddEntry.setBounds(193, 263, 123, 23);
+		mainWindow.getContentPane().add(btnAddEntry);
+		
+		JButton btnEditEntry = new JButton("Edit Entry");
+		btnEditEntry.setBounds(351, 263, 123, 23);
+		mainWindow.getContentPane().add(btnEditEntry);
+		
+		JButton btnRemoveEntry = new JButton("Remove Entry");
+		btnRemoveEntry.setBounds(503, 263, 123, 23);
+		mainWindow.getContentPane().add(btnRemoveEntry);
+		
 		JMenuBar menuBar = new JMenuBar();
 		mainWindow.setJMenuBar(menuBar);
 		
@@ -103,7 +117,12 @@ public class MainWindow {
 		
 		JMenuItem mntmHelp = new JMenuItem("Help...");
 		mnHelp.add(mntmHelp);
-		
-		
+	}
+	
+	// This will read a file and populate the list of existing items
+	private void populateItemList() {
+		// TODO Auto-generated method stub
+		// read all items from file
+		// populate itemList
 	}
 }
