@@ -15,9 +15,13 @@ import javax.swing.JScrollBar;
 import javax.swing.JList;
 import javax.swing.ScrollPaneConstants;
 import java.awt.SystemColor;
+
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
+import java.awt.PopupMenu;
+
 import javax.swing.SwingConstants;
 
 /**
@@ -53,10 +57,14 @@ public class MainWindow {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(183, 0, 464, 297);
+		scrollPane.setBounds(183, 28, 464, 269);
 		mainWindow.getContentPane().add(scrollPane);
 		
-		JList list = new JList();
+		DefaultListModel listItems = new DefaultListModel();
+		listItems.addElement("GMail account");
+		listItems.addElement("Yahoo email");
+		
+		JList list = new JList(listItems);
 		list.setBackground(SystemColor.text);
 		scrollPane.setViewportView(list);
 		
@@ -72,13 +80,11 @@ public class MainWindow {
 		btnComputer.setBounds(37, 117, 109, 23);
 		mainWindow.getContentPane().add(btnComputer);
 		
-		JLabel lblPasswordTypes = new JLabel("View Password Types");
+		JLabel lblPasswordTypes = new JLabel("Categories");
 		lblPasswordTypes.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPasswordTypes.setFont(new Font("Arial", Font.BOLD, 15));
 		lblPasswordTypes.setBounds(0, 11, 183, 24);
 		mainWindow.getContentPane().add(lblPasswordTypes);
-		
-		
 		
 		JMenuBar menuBar = new JMenuBar();
 		mainWindow.setJMenuBar(menuBar);
@@ -91,6 +97,13 @@ public class MainWindow {
 		
 		JMenuItem mntmRemoveEntry = new JMenuItem("Remove Entry");
 		mnFile.add(mntmRemoveEntry);
+		
+		JMenu mnHelp = new JMenu("Help");
+		menuBar.add(mnHelp);
+		
+		JMenuItem mntmHelp = new JMenuItem("Help...");
+		mnHelp.add(mntmHelp);
+		
 		
 	}
 }
