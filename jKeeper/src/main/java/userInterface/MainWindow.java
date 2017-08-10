@@ -22,16 +22,14 @@ public class MainWindow {
 	private JFrame mainWindow;
 
 	/**
-	 * Create the application.
+	 * Initializes the user interface and sets the visibility of the window to "true"
 	 */
 	public MainWindow() {
 		initialize();
 		this.mainWindow.setVisible(true);
 	}
 
-	/**
-	 * Sets up the user interface
-	 */
+	// Generates the needed user interface
 	private void initialize() {
 		mainWindow = new JFrame();
 		mainWindow.setTitle("jKeeper Password Manager");

@@ -60,17 +60,15 @@ public class LoginWindow {
 		}
 	}
 	
-	/**
-	 * Generate the needed user interface
-	 */
+	// Generates the needed user interface
 	private void initialize() {
 		this.loginBackend = new LoginBackend();
-		frmJkeeperPasswordManager.setTitle("JKeeper Password Manager");
+		frmJkeeperPasswordManager.setTitle("jKeeper Password Manager");
 		frmJkeeperPasswordManager.setBounds(100, 100, 398, 247);
 		frmJkeeperPasswordManager.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmJkeeperPasswordManager.getContentPane().setLayout(null);
 		
-		JLabel lblJkeeperV = new JLabel("JKeeper v1.0");
+		JLabel lblJkeeperV = new JLabel("jKeeper v1.0");
 		lblJkeeperV.setHorizontalAlignment(SwingConstants.CENTER);
 		lblJkeeperV.setFont(new Font("Arial Black", Font.BOLD, 20));
 		lblJkeeperV.setBounds(104, 32, 173, 29);

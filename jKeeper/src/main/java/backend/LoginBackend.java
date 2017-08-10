@@ -21,6 +21,7 @@ public class LoginBackend {
 	}
 	
 	/**
+	 * Verifies if the login password was correct
 	 * 
 	 * @param attemptedPassword - The password entered by the user in the login window.
 	 * @return Returns true if the password entered equals the user's account password, false otherwise.
@@ -29,13 +30,11 @@ public class LoginBackend {
 		String attemptedPasswordString = new String(attemptedPassword);
 		return attemptedPasswordString.equals(readLoginPassword());
 	}
-	
-	/**
-	 * Returns the user's password from their user profile.
-	 * 
-	 * @return Returns null if there was an error reading from the user profile, returns
-	 * the user's password otherwise.
-	 */
+
+	// Returns the user's password from their user profile.
+	//
+	// @return Returns null if there was an error reading from the user profile, returns
+	// the user's password otherwise.
 	private String readLoginPassword() {
 		String password = null;
 		

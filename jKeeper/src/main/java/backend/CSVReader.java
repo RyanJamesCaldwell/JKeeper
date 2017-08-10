@@ -53,11 +53,8 @@ public class CSVReader {
 		return password;
 	}
 	
-	/**
-	 * Opens the user profile to be read by a BufferedReader.
-	 * 
-	 * @return Returns true if the file was opened without error, false otherwise.
-	 */
+	// Opens the user profile to be read by a BufferedReader
+	// @return Returns true if the file was opened without error, false otherwise
 	private boolean openUserProfile() {
 		boolean successfullyOpened = false;
 		
