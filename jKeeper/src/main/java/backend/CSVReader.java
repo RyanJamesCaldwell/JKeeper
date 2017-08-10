@@ -7,6 +7,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 /**
+ * Class parses CSV files pulling necessary information from the userAccount.csv file
  * 
  * @author Ryan Caldwell
  * @version Version 1.0, 10-AUG-2017
@@ -26,9 +27,28 @@ public class CSVReader {
 	 * @param fileToRead - The CSV file to be read
 	 */
 	public CSVReader(File fileToRead) {
-		//TODO Error checking - need to check if the file is indeed a CSV file
-		this.userProfile = fileToRead;
-		openUserProfile();
+		if(verifyCSVFile(fileToRead)){
+			this.userProfile = fileToRead;
+			openUserProfile();
+		}
+		else {
+			System.err.println("Error: File is not a CSV file.");
+		}
+	}
+	
+	/**
+	 * Returns true if the file is a CSV file, false if other type of file.
+	 * 
+	 * @param fileToRead - The file being tested to see if it is a CSV file.
+	 * @return Returns true if the file is a CSV file, false if other type of file.
+	 */
+	public boolean verifyCSVFile(File fileToRead) {
+		String extension = "";
+		int i = fileToRead.toString().lastIndexOf(".");
+		if(i > 0) {
+			extension = fileToRead.toString().substring(i+1);
+		}
+		return extension.equalsIgnoreCase("csv");
 	}
 
 	/**
@@ -47,10 +67,32 @@ public class CSVReader {
 			splitAccountLine = line.split(CSV_SPLIT);
 			password = splitAccountLine[1];
 		} catch (IOException e) {
-			System.err.println("Error reading from user profile.");
+			System.err.println("Error: Error reading from user profile.");
 		}
 		
 		return password;
+	}
+	
+	/**
+	 * Returns the user's account name from their user profile
+	 * 
+	 * @return Returns null if there was an error reading from the user profile, returns
+	 * the user's account name otherwise.
+	 */
+	public String getAccountName() {
+		String line = null;
+		String[] splitAccountLine;
+		String accountName = null;
+		
+		try {
+			line = br.readLine();
+			splitAccountLine = line.split(CSV_SPLIT);
+			accountName = splitAccountLine[0];
+		} catch (IOException e) {
+			System.err.println("Error: Error reading from user profile.");
+		}
+		
+		return accountName;
 	}
 	
 	// Opens the user profile to be read by a BufferedReader
@@ -63,7 +105,7 @@ public class CSVReader {
 			successfullyOpened = true;
 		} catch (FileNotFoundException e) {
 			successfullyOpened = false;
-			System.err.println("Error opening user profile.");
+			System.err.println("Error: Error opening user profile.");
 		}
 		
 		return successfullyOpened;
@@ -81,7 +123,7 @@ public class CSVReader {
 			br.close();
 			successfullyClosed = true;
 		} catch (IOException e) {
-			System.err.println("Error closing user profile.");
+			System.err.println("Error: Error closing user profile.");
 			successfullyClosed = false;
 		}
 		
