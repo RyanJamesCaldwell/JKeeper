@@ -5,6 +5,14 @@ import java.util.Scanner;
 
 import org.apache.commons.codec.digest.DigestUtils;
 
+/**
+ * 
+ * This class will eventually be used for hashing the entered passwords so 
+ * it isn't store in plain text.
+ * 
+ * @author Ryan Caldwell
+ * @version Version 1.0, 10-AUG-2017
+ */
 public class Password {
 	
 	private String password;

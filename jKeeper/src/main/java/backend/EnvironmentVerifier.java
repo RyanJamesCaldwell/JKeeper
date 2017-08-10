@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
  * Verifies the environment's information, such as finding if dependencies exist already
  * 
  * @author Ryan Caldwell
- * @version Version 1.0, 9-OCT-2017
+ * @version Version 1.0, 9-AUG-2017
  */
 public class EnvironmentVerifier {
 	

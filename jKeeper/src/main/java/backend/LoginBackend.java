@@ -6,7 +6,7 @@ import java.io.File;
  * The back end logic that is attached to LoginWindow.
  * 
  * @author Ryan Caldwell
- * @version Version 1.0, 10-OCT-2017
+ * @version Version 1.0, 10-AUG-2017
  */
 public class LoginBackend {
 	

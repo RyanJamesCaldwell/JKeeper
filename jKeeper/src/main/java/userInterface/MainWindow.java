@@ -14,7 +14,7 @@ import javax.swing.JMenuItem;
  * The main window that the user interacts with after logging in successfully.
  * 
  * @author Ryan Caldwell
- * @version Version 1.0, 10-OCT-2017
+ * @version Version 1.0, 10-AUG-2017
  */
 public class MainWindow {
 

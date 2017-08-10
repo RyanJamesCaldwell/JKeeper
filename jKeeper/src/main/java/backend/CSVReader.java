@@ -6,13 +6,27 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 
+/**
+ * 
+ * @author Ryan Caldwell
+ * @version Version 1.0, 10-AUG-2017
+ */
 public class CSVReader {
 	
+	// The user profile that is to be passed in 
 	private File userProfile;
+	// BufferedReader for retrieving information from the user account file
 	private BufferedReader br;
+	// CSV delimiter
 	private static final String CSV_SPLIT = ",";
 	
+	/**
+	 * Receives a CSV file and opens it to be read.
+	 * 
+	 * @param fileToRead - The CSV file to be read
+	 */
 	public CSVReader(File fileToRead) {
+		//TODO Error checking - need to check if the file is indeed a CSV file
 		this.userProfile = fileToRead;
 		openUserProfile();
 	}

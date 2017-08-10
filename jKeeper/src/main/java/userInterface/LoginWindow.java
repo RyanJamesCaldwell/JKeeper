@@ -22,7 +22,7 @@ import javax.swing.JPasswordField;
  * Displays the log in window for the JKeeper Password Manager.
  * 
  * @author Ryan Caldwell
- * @version Version 1.0, 9-OCT-2017
+ * @version Version 1.0, 9-AUG-2017
  *
  */
 public class LoginWindow {
