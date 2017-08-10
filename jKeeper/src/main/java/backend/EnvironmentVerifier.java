@@ -18,18 +18,34 @@ public class EnvironmentVerifier {
 	
 	// User's account profile
 	private File userProfile;
+	// AppData folder on Windows machines
 	private File appDataFolder;
+	// PrintWriter for writing to the user's account file
 	private PrintWriter fileWriter;
 	
+	/**
+	 * Creates the files for the AppData folder and the jKeeper folder
+	 */
 	public EnvironmentVerifier() {
 		this.appDataFolder = new File(System.getenv("APPDATA"));
-		this.userProfile = new File(System.getenv("APPDATA") + "/JKeeper/UserProfile.csv");
+		this.userProfile = new File(System.getenv("APPDATA") + "/jKeeper/UserProfile.csv");
 	}
 	
+	/**
+	 * Checks if the user already has a user profile created in the jKeeper folder
+	 * in their AppData folder.
+	 * 
+	 * @return Returns true if user profile exists, false if not.
+	 */
 	public boolean hasUserProfile() {
 		return this.userProfile.exists();
 	}
 
+	/**
+	 * Checks if the user is on a Windows operating system (has an AppData folder).
+	 * 
+	 * @return Returns true if AppData folder is found, false if not.
+	 */
 	public boolean correctOS() {
 		return this.appDataFolder.exists();
 	}
@@ -39,7 +55,7 @@ public class EnvironmentVerifier {
 	 */
 	public void setupEnvironment() {
 		File JKeeperFolder;
-		JKeeperFolder = new File(System.getenv("APPDATA") + "/JKeeper");
+		JKeeperFolder = new File(System.getenv("APPDATA") + "/jKeeper");
 		JKeeperFolder.mkdir();
 		
 		try {
@@ -57,12 +73,12 @@ public class EnvironmentVerifier {
 			this.fileWriter = new PrintWriter(this.userProfile);
 			String desiredAccountName = JOptionPane.showInputDialog(null, "Please enter your desired account name: ");
 			String desiredAccountPassword = JOptionPane.showInputDialog(null, "Please enter your desired account password: ");
-			System.out.println(desiredAccountName + " " + desiredAccountPassword);
+			
 			this.fileWriter.append(desiredAccountName + "," + desiredAccountPassword);
 			this.fileWriter.close();
 		} 
 		catch (FileNotFoundException e) {
-			System.err.println("Error opening user profile.");
+			System.err.println("Error opening user profile/writing to user profile.");
 		}
 	}
 
