@@ -59,7 +59,7 @@ public class MainWindow {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(183, 0, 464, 254);
+		scrollPane.setBounds(183, 11, 454, 243);
 		mainWindow.getContentPane().add(scrollPane);
 		
 		itemList = new DefaultListModel();
