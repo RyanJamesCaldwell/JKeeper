@@ -6,9 +6,10 @@ import org.junit.runners.Suite.SuiteClasses;
 
 import testEntries.TestCCEntries;
 import testEntries.TestComputerEntries;
+import testEntries.TestLoginEntries;
 
 @RunWith(Suite.class)
-@SuiteClasses({ TestCCEntries.class, TestComputerEntries.class })
+@SuiteClasses({ TestCCEntries.class, TestComputerEntries.class, TestLoginEntries.class })
 public class RunTestSuite {
 	
 }
