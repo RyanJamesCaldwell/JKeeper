@@ -23,6 +23,11 @@ import java.awt.Font;
 import java.awt.PopupMenu;
 
 import javax.swing.SwingConstants;
+import javax.swing.KeyStroke;
+import java.awt.event.KeyEvent;
+import java.util.ArrayList;
+import java.awt.event.InputEvent;
+import java.awt.TextField;
 
 /**
  * 
@@ -44,7 +49,9 @@ public class MainWindow {
 	 */
 	public MainWindow() {
 		initialize();
-		populateItemList();
+		this.mainWindowBackend = new MainWindowBackend();
+		//TODO get all entries in file returns ArrayList<String> allEntries
+		//populateItemList(ArrayList<String> allEntries)
 		this.mainWindow.setVisible(true);
 	}
 
@@ -59,33 +66,31 @@ public class MainWindow {
 		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(183, 11, 454, 243);
+		scrollPane.setBounds(193, 11, 433, 243);
 		mainWindow.getContentPane().add(scrollPane);
 		
 		itemList = new DefaultListModel();
-		itemList.addElement("GMail account");
-		itemList.addElement("Yahoo email");
 		
 		JList list = new JList(itemList);
 		list.setBackground(SystemColor.text);
 		scrollPane.setViewportView(list);
 		
 		JButton btnLogin = new JButton("Login");
-		btnLogin.setBounds(37, 46, 109, 23);
+		btnLogin.setBounds(44, 46, 109, 23);
 		mainWindow.getContentPane().add(btnLogin);
 		
 		JButton btnCreditCard = new JButton("Credit Card");
-		btnCreditCard.setBounds(37, 83, 109, 23);
+		btnCreditCard.setBounds(44, 83, 109, 23);
 		mainWindow.getContentPane().add(btnCreditCard);
 		
 		JButton btnComputer = new JButton("Computer");
-		btnComputer.setBounds(37, 117, 109, 23);
+		btnComputer.setBounds(44, 117, 109, 23);
 		mainWindow.getContentPane().add(btnComputer);
 		
 		JLabel lblPasswordTypes = new JLabel("Categories");
 		lblPasswordTypes.setHorizontalAlignment(SwingConstants.CENTER);
 		lblPasswordTypes.setFont(new Font("Arial", Font.BOLD, 15));
-		lblPasswordTypes.setBounds(0, 11, 183, 24);
+		lblPasswordTypes.setBounds(54, 11, 89, 24);
 		mainWindow.getContentPane().add(lblPasswordTypes);
 		
 		JButton btnAddEntry = new JButton("Add Entry");
@@ -109,6 +114,9 @@ public class MainWindow {
 		JMenuItem menuItemAddEntry = new JMenuItem("Add Entry");
 		mnFile.add(menuItemAddEntry);
 		
+		JMenuItem mntmEditEntry = new JMenuItem("Edit Entry");
+		mnFile.add(mntmEditEntry);
+		
 		JMenuItem mntmRemoveEntry = new JMenuItem("Remove Entry");
 		mnFile.add(mntmRemoveEntry);
 		
@@ -120,9 +128,15 @@ public class MainWindow {
 	}
 	
 	// This will read a file and populate the list of existing items
-	private void populateItemList() {
-		// TODO Auto-generated method stub
-		// read all items from file
-		// populate itemList
+	// @params type The type you want to populate
+	private void populateItemList(String type) {
+		ArrayList<String> itemsToPopulate;
+		itemsToPopulate = new ArrayList<String>();
+		
+		itemsToPopulate = this.mainWindowBackend.getEntriesByType(type);
+		
+		for(int i = 0; i < itemsToPopulate.size(); i++) {
+			this.itemList.addElement(itemsToPopulate.get(i));
+		}
 	}
 }
