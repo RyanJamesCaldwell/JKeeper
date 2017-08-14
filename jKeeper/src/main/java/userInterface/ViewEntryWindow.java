@@ -230,7 +230,7 @@ public class ViewEntryWindow extends JFrame {
 		txtEmail.setBounds(190, 171, 180, 20);
 		contentPane.add(txtEmail);
 		txtEmail.setColumns(10);
-		txtURL.setText(this.entryToView.getEntryEmail());
+		txtEmail.setText(this.entryToView.getEntryEmail());
 		
 		txtCCNumber = new JTextField();
 		txtCCNumber.setEditable(false);
