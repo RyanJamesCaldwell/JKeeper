@@ -5,7 +5,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -67,6 +69,10 @@ public class LoginWindow {
 		frmJkeeperPasswordManager.setBounds(100, 100, 398, 247);
 		frmJkeeperPasswordManager.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frmJkeeperPasswordManager.getContentPane().setLayout(null);
+		
+		// Center the JFrame on the user's screen
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		frmJkeeperPasswordManager.setLocation(dim.width/2-frmJkeeperPasswordManager.getSize().width/2, dim.height/2-frmJkeeperPasswordManager.getSize().height/2);
 		
 		JLabel lblJkeeperV = new JLabel("jKeeper v1.0");
 		lblJkeeperV.setHorizontalAlignment(SwingConstants.CENTER);

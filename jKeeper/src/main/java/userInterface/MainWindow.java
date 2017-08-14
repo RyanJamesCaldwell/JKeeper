@@ -1,5 +1,6 @@
 package userInterface;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -8,8 +9,11 @@ import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JMenu;
 import javax.swing.JMenuItem;
+import javax.swing.JOptionPane;
 
 import backend.MainWindowBackend;
+import entries.BasicEntry;
+
 import javax.swing.JScrollPane;
 import javax.swing.JScrollBar;
 import javax.swing.JList;
@@ -28,6 +32,8 @@ import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.awt.event.InputEvent;
 import java.awt.TextField;
+import java.awt.Toolkit;
+import javax.swing.JSeparator;
 
 /**
  * 
@@ -42,7 +48,16 @@ public class MainWindow {
 	private JFrame mainWindow;
 	// The back end operations of the main window
 	private MainWindowBackend mainWindowBackend;
-	private DefaultListModel itemList;
+	// The item list where the names of user entries will be held
+	private DefaultListModel<String> itemList;
+	// Used for searching entry type "login"
+	public static final int ENTRY_TYPE_LOGIN = 0;
+	// Used for searching entry type "computer"
+	public static final int ENTRY_TYPE_COMPUTER = 1;
+	// Used for searching entry type "credit card"
+	public static final int ENTRY_TYPE_CREDIT_CARD = 2;
+	// Used for retrieving all entry types
+	public static final int ENTRY_TYPE_ALL = 3;
 
 	/**
 	 * Initializes the user interface and sets the visibility of the window to "true"
@@ -60,32 +75,51 @@ public class MainWindow {
 		mainWindow = new JFrame();
 		mainWindow.setResizable(false);
 		mainWindow.setTitle("jKeeper Password Manager");
-		mainWindow.setBounds(100, 100, 653, 347);
+		mainWindow.setBounds(100, 100, 653, 375);
 		mainWindow.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		mainWindow.getContentPane().setLayout(null);
 		
+		// Center the JFrame on the user's screen
+		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+		mainWindow.setLocation(dim.width/2-mainWindow.getSize().width/2, dim.height/2-mainWindow.getSize().height/2);
+		
 		JScrollPane scrollPane = new JScrollPane();
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setBounds(193, 11, 433, 243);
+		scrollPane.setBounds(193, 11, 433, 247);
 		mainWindow.getContentPane().add(scrollPane);
 		
-		itemList = new DefaultListModel();
+		itemList = new DefaultListModel<String>();
 		
-		JList list = new JList(itemList);
+		final JList list = new JList(itemList);
 		list.setBackground(SystemColor.text);
 		scrollPane.setViewportView(list);
 		
 		JButton btnLogin = new JButton("Login");
 		btnLogin.setBounds(44, 46, 109, 23);
 		mainWindow.getContentPane().add(btnLogin);
+		btnLogin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				populateItemList(ENTRY_TYPE_LOGIN);
+			}
+		});
 		
 		JButton btnCreditCard = new JButton("Credit Card");
 		btnCreditCard.setBounds(44, 83, 109, 23);
 		mainWindow.getContentPane().add(btnCreditCard);
+		btnCreditCard.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				populateItemList(ENTRY_TYPE_CREDIT_CARD);
+			}
+		});
 		
 		JButton btnComputer = new JButton("Computer");
 		btnComputer.setBounds(44, 117, 109, 23);
 		mainWindow.getContentPane().add(btnComputer);
+		btnComputer.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				populateItemList(ENTRY_TYPE_COMPUTER);
+			}
+		});
 		
 		JLabel lblPasswordTypes = new JLabel("Categories");
 		lblPasswordTypes.setHorizontalAlignment(SwingConstants.CENTER);
@@ -94,16 +128,32 @@ public class MainWindow {
 		mainWindow.getContentPane().add(lblPasswordTypes);
 		
 		JButton btnAddEntry = new JButton("Add Entry");
-		btnAddEntry.setBounds(193, 263, 123, 23);
+		btnAddEntry.setBounds(186, 291, 123, 23);
 		mainWindow.getContentPane().add(btnAddEntry);
 		
 		JButton btnEditEntry = new JButton("Edit Entry");
-		btnEditEntry.setBounds(351, 263, 123, 23);
+		btnEditEntry.setBounds(345, 291, 123, 23);
 		mainWindow.getContentPane().add(btnEditEntry);
 		
 		JButton btnRemoveEntry = new JButton("Remove Entry");
-		btnRemoveEntry.setBounds(503, 263, 123, 23);
+		btnRemoveEntry.setBounds(503, 291, 123, 23);
 		mainWindow.getContentPane().add(btnRemoveEntry);
+		
+		JButton btnViewEntry = new JButton("View Entry");
+		btnViewEntry.setBounds(30, 291, 123, 23);
+		mainWindow.getContentPane().add(btnViewEntry);
+		btnViewEntry.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				int arrayIndex = list.getSelectedIndex();
+				if(arrayIndex != -1){
+					new ViewEntryWindow(mainWindowBackend.getEntriesCurrentlyDisplayed().get(arrayIndex));
+				}
+			}
+		});
+		
+		JSeparator separator = new JSeparator();
+		separator.setBounds(10, 275, 627, 5);
+		mainWindow.getContentPane().add(separator);
 		
 		JMenuBar menuBar = new JMenuBar();
 		mainWindow.setJMenuBar(menuBar);
@@ -125,18 +175,29 @@ public class MainWindow {
 		
 		JMenuItem mntmHelp = new JMenuItem("Help...");
 		mnHelp.add(mntmHelp);
+		mntmHelp.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				JOptionPane.showMessageDialog(null, "To add an entry, click the 'Add Entry' button"
+						+ " and enter the relevant information.\nTo edit an existing entry, select"
+						+ " the entry that is in the main window, and click the 'Edit Entry' button."
+						+ "\nTo remove an entry, select the entry that you want to remove and click"
+						+ " the 'Remove Entry' button.");
+			}
+		});
 	}
 	
 	// This will read a file and populate the list of existing items
 	// @params type The type you want to populate
-	private void populateItemList(String type) {
-		ArrayList<String> itemsToPopulate;
-		itemsToPopulate = new ArrayList<String>();
+	private void populateItemList(int type) {
+		this.itemList.clear();
+		
+		ArrayList<BasicEntry> itemsToPopulate;
+		itemsToPopulate = new ArrayList<BasicEntry>();
 		
 		itemsToPopulate = this.mainWindowBackend.getEntriesByType(type);
 		
 		for(int i = 0; i < itemsToPopulate.size(); i++) {
-			this.itemList.addElement(itemsToPopulate.get(i));
+			this.itemList.addElement(itemsToPopulate.get(i).getEntryName());
 		}
 	}
 }
