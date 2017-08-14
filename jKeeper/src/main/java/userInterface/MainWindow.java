@@ -1,7 +1,6 @@
 package userInterface;
 
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -15,7 +14,6 @@ import backend.MainWindowBackend;
 import entries.BasicEntry;
 
 import javax.swing.JScrollPane;
-import javax.swing.JScrollBar;
 import javax.swing.JList;
 import javax.swing.ScrollPaneConstants;
 import java.awt.SystemColor;
@@ -24,14 +22,9 @@ import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import java.awt.Font;
-import java.awt.PopupMenu;
 
 import javax.swing.SwingConstants;
-import javax.swing.KeyStroke;
-import java.awt.event.KeyEvent;
 import java.util.ArrayList;
-import java.awt.event.InputEvent;
-import java.awt.TextField;
 import java.awt.Toolkit;
 import javax.swing.JSeparator;
 
@@ -40,7 +33,7 @@ import javax.swing.JSeparator;
  * The main window that the user interacts with after logging in successfully.
  * 
  * @author Ryan Caldwell
- * @version Version 1.0, 10-AUG-2017
+ * @version Version 1.0, 14-AUG-2017
  */
 public class MainWindow {
 
@@ -90,7 +83,7 @@ public class MainWindow {
 		
 		itemList = new DefaultListModel<String>();
 		
-		final JList list = new JList(itemList);
+		final JList<String> list = new JList<String>(itemList);
 		list.setBackground(SystemColor.text);
 		scrollPane.setViewportView(list);
 		
@@ -130,6 +123,11 @@ public class MainWindow {
 		JButton btnAddEntry = new JButton("Add Entry");
 		btnAddEntry.setBounds(186, 291, 123, 23);
 		mainWindow.getContentPane().add(btnAddEntry);
+		btnAddEntry.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new AddEntryWindow();
+			}
+		});
 		
 		JButton btnEditEntry = new JButton("Edit Entry");
 		btnEditEntry.setBounds(345, 291, 123, 23);
@@ -163,6 +161,11 @@ public class MainWindow {
 		
 		JMenuItem menuItemAddEntry = new JMenuItem("Add Entry");
 		mnFile.add(menuItemAddEntry);
+		menuItemAddEntry.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				new AddEntryWindow();
+			}
+		});
 		
 		JMenuItem mntmEditEntry = new JMenuItem("Edit Entry");
 		mnFile.add(mntmEditEntry);

@@ -2,6 +2,7 @@ package backend;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import entries.BasicEntry;
@@ -13,7 +14,7 @@ import entries.LoginEntry;
  * The back end logic that is attached to MainWindow
  * 
  * @author Ryan Caldwell
- * @version Version 1.0, 11-AUG-2017
+ * @version Version 1.0, 14-AUG-2017
  */
 public class MainWindowBackend {
 	
@@ -39,6 +40,10 @@ public class MainWindowBackend {
 	private void createNewUserDataFile() {
 		try {
 			this.userDataFile.createNewFile();
+			PrintWriter pw = new PrintWriter(new File(this.userDataFile.toString()));
+			pw.append("<entries>");
+			pw.append("</entries>");
+			pw.close();
 		} catch (IOException e) {
 			System.err.println("Error: Could not create user data file.");
 		}
