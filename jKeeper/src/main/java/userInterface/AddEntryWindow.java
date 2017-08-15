@@ -14,7 +14,11 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+import backend.EntryXMLWriter;
+import entries.ComputerEntry;
 import entries.CreditCardEntry;
+import entries.LoginEntry;
+
 import javax.swing.JButton;
 import javax.swing.JSeparator;
 
@@ -45,8 +49,7 @@ public class AddEntryWindow extends JFrame {
 	
 	private void defaultWindowOptions() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setTitle("Add Credit Card Entry");
-		//setBounds(100, 100, 450, 164);
+		setTitle("Add New Entry");
 		setBounds(100, 100, 450, 171);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -86,7 +89,7 @@ public class AddEntryWindow extends JFrame {
 				btnComputer.hide();
 				btnLogin.hide();
 				lblSelectANew.hide();
-				System.out.println("call showComputerUI()");
+				showSimpleUI("Computer");
 			}
 		});
 		
@@ -98,7 +101,7 @@ public class AddEntryWindow extends JFrame {
 				btnComputer.hide();
 				btnLogin.hide();
 				lblSelectANew.hide();
-				System.out.println("call showLoginUI()");
+				showSimpleUI("Login");
 			}
 		});
 		
@@ -107,9 +110,7 @@ public class AddEntryWindow extends JFrame {
 		lblAddNewEntry.setHorizontalAlignment(SwingConstants.CENTER);
 		lblAddNewEntry.setBounds(10, 0, 424, 50);
 		contentPane.add(lblAddNewEntry);
-		
-
-		
+	
 		centerWindow();
 		setResizable(false);
 		setVisible(true);
@@ -120,7 +121,90 @@ public class AddEntryWindow extends JFrame {
 		setLocation(dim.width/2-getSize().width/2, dim.height/2-getSize().height/2);
 	}
 	
+	private void showSimpleUI(String type) {
+		setTitle("Add New Entry");
+		setBounds(100, 100, 450, 458);
+		centerWindow();
+		
+		JLabel lblEntryName = new JLabel("Entry name:");
+		lblEntryName.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblEntryName.setBounds(113, 104, 73, 14);
+		contentPane.add(lblEntryName);
+		
+		JLabel lblEntryUsername = new JLabel("Entry username:");
+		lblEntryUsername.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblEntryUsername.setBounds(91, 129, 95, 14);
+		contentPane.add(lblEntryUsername);
+		
+		JLabel lblEntryPassword = new JLabel("Entry password:");
+		lblEntryPassword.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblEntryPassword.setBounds(91, 154, 95, 14);
+		contentPane.add(lblEntryPassword);
+		
+		JLabel lblEntryUrl = new JLabel("Entry URL:");
+		lblEntryUrl.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblEntryUrl.setBounds(113, 179, 73, 14);
+		contentPane.add(lblEntryUrl);
+		
+		JLabel lblEntryEmail = new JLabel("Entry email:");
+		lblEntryEmail.setHorizontalAlignment(SwingConstants.RIGHT);
+		lblEntryEmail.setBounds(113, 204, 73, 14);
+		contentPane.add(lblEntryEmail);
+		
+		txtEntryName = new JTextField();
+		txtEntryName.setBounds(196, 101, 187, 20);
+		contentPane.add(txtEntryName);
+		txtEntryName.setColumns(10);
+		
+		txtEntryUsername = new JTextField();
+		txtEntryUsername.setBounds(196, 126, 187, 20);
+		contentPane.add(txtEntryUsername);
+		txtEntryUsername.setColumns(10);
+		
+		txtEntryPassword = new JTextField();
+		txtEntryPassword.setBounds(196, 151, 187, 20);
+		contentPane.add(txtEntryPassword);
+		txtEntryPassword.setColumns(10);
+		
+		txtEntryURL = new JTextField();
+		txtEntryURL.setBounds(196, 176, 187, 20);
+		contentPane.add(txtEntryURL);
+		txtEntryURL.setColumns(10);
+		
+		txtEntryEmail = new JTextField();
+		txtEntryEmail.setBounds(196, 201, 187, 20);
+		contentPane.add(txtEntryEmail);
+		txtEntryEmail.setColumns(10);
+		
+		JButton btnAddEntry = new JButton("Add Entry");
+		
+		if(type.equals("Login")) {
+			btnAddEntry.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					LoginEntry loginEntry = new LoginEntry(txtEntryName.getText(), txtEntryUsername.getText(),
+							txtEntryPassword.getText(), txtEntryURL.getText(), txtEntryEmail.getText());
+					new EntryXMLWriter().writeLoginEntryToFile(loginEntry);
+					dispose();
+				}
+			});
+		}
+		else if(type.equals("Computer")) {
+			btnAddEntry.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent arg0) {
+					ComputerEntry computerEntry = new ComputerEntry(txtEntryName.getText(), txtEntryUsername.getText(),
+							txtEntryPassword.getText(), txtEntryURL.getText(), txtEntryEmail.getText());
+					new EntryXMLWriter().writeComputerEntryToFile(computerEntry);
+					dispose();
+				}
+			});
+		}
+		
+		btnAddEntry.setBounds(177, 327, 89, 23);
+		contentPane.add(btnAddEntry);
+	}
+	
 	private void showCreditCardUI(String type) {
+		setTitle("Add Credit Card Entry");
 		setBounds(100, 100, 450, 458);
 		centerWindow();
 		
@@ -204,6 +288,7 @@ public class AddEntryWindow extends JFrame {
 		contentPane.add(txtEntrySecurityCode);
 		txtEntrySecurityCode.setColumns(10);
 		
+		// Create a new CreditCardEntry and write it to the userData.xml file
 		JButton btnAddEntry = new JButton("Add Entry");
 		btnAddEntry.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
@@ -211,6 +296,8 @@ public class AddEntryWindow extends JFrame {
 						txtEntryPassword.getText(), txtEntryURL.getText(), txtEntryEmail.getText(),
 						txtEntryCCNumber.getText(), txtEntryExpiration.getText(), 
 						txtEntrySecurityCode.getText());
+				new EntryXMLWriter().writeCreditCardEntryToFile(cce);
+				dispose();
 			}
 		});
 		btnAddEntry.setBounds(177, 327, 89, 23);
