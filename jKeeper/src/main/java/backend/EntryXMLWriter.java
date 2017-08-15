@@ -1,10 +1,8 @@
 package backend;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import entries.BasicEntry;
 import entries.ComputerEntry;
@@ -22,7 +20,7 @@ import org.w3c.dom.*;
  * Class is used for writing new entries to the userData.xml file
  * 
  * @author Ryan Caldwell
- * @version Version 1.0, 14-AUG-2017
+ * @version Version 1.0, 15-AUG-2017
  */
 public class EntryXMLWriter {
 
@@ -38,6 +36,11 @@ public class EntryXMLWriter {
 		userFile = new File(System.getenv("APPDATA") + "/jKeeper/userData.xml");
 	}
 	
+	/**
+	 * Writes a LoginEntry to the user's userData.xml file
+	 * 
+	 * @param newEntry A LoginEntry to be written to the userData.xml file
+	 */
 	public void writeLoginEntryToFile(LoginEntry newEntry) {
 		if(newEntry.getClass() != LoginEntry.class){
 			System.err.println("Error: Not a LoginEntry.");
@@ -47,6 +50,11 @@ public class EntryXMLWriter {
 		}
 	}
 	
+	/**
+	 * Writes a ComputerEntry to the user's userData.xml file
+	 * 
+	 * @param newEntry A ComputerEntry to be written to the userData.xml file
+	 */
 	public void writeComputerEntryToFile(ComputerEntry newEntry) {
 		if(newEntry.getClass() != ComputerEntry.class){
 			System.err.println("Error: Not a ComputerEntry.");
@@ -65,7 +73,7 @@ public class EntryXMLWriter {
 	    
 	    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 	    
-	    // Open the existing userData.xml document
+	    // Open the existing userData.xml document to write to it
 		try {
 	        DocumentBuilder db = dbf.newDocumentBuilder();
 	        dom = db.parse(this.userFile);
@@ -75,9 +83,11 @@ public class EntryXMLWriter {
 	        // Write all information to the new entry
 	        Element newEntryItem = dom.createElement("entry");
 	        
+	        // Add "type" and "name" attributes to the new entry
 	        newEntryItem.setAttribute("type", newEntry.getEntryType());
 	        newEntryItem.setAttribute("name", newEntry.getEntryName());
 	        
+	        // Add the sub-elements describing the entry
 	        newElement = dom.createElement("username");
 	        newElement.setTextContent(newEntry.getEntryUsername());
 	        newEntryItem.appendChild(newElement);
@@ -116,7 +126,9 @@ public class EntryXMLWriter {
 	}
 
 	/**
-	 * Will write the credit card entry to the userData.xml file
+	 * Writes a CreditCardEntry to the user's userData.xml file
+	 * 
+	 * @param newEntry A CreditCardEntry to be written to the userData.xml file
 	 */
 	public void writeCreditCardEntryToFile(CreditCardEntry newEntry) {
 		if(newEntry.getClass() != CreditCardEntry.class){
@@ -128,7 +140,7 @@ public class EntryXMLWriter {
 		    
 		    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		    
-		    // Open the existing userData.xml document
+		    // Open the existing userData.xml document to write to it
 			try {
 		        DocumentBuilder db = dbf.newDocumentBuilder();
 		        dom = db.parse(this.userFile);
@@ -137,9 +149,12 @@ public class EntryXMLWriter {
 		        Element newElement;
 		        // Write all information to the new entry
 		        Element newEntryItem = dom.createElement("entry");
+		        
+		        // Add "type" and "name" attributes to the new entry
 		        newEntryItem.setAttribute("type", "Credit Card");
 		        newEntryItem.setAttribute("name", newEntry.getEntryName());
 		        
+		        // Add the sub-elements describing the entry
 		        newElement = dom.createElement("username");
 		        newElement.setTextContent(newEntry.getEntryUsername());
 		        newEntryItem.appendChild(newElement);
