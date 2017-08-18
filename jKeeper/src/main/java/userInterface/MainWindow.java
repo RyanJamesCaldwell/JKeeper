@@ -179,6 +179,13 @@ public class MainWindow {
 		
 		JMenuItem mntmRemoveEntry = new JMenuItem("Remove Entry");
 		mnFile.add(mntmRemoveEntry);
+		mntmRemoveEntry.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(list.getSelectedValue() != null) {
+					mainWindowBackend.removeEntry(list.getSelectedValue());
+				}
+			}
+		});
 		
 		JMenu mnHelp = new JMenu("Help");
 		menuBar.add(mnHelp);
