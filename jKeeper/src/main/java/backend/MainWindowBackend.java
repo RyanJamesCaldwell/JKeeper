@@ -32,7 +32,10 @@ public class MainWindowBackend {
 	private File userDataFile;
 	// The entries that are displayed on the main window
 	private ArrayList<BasicEntry> entriesCurrentlyDisplayed;
+	// The XMLEntryReader that allows users to view their entries in the userData.xml file
 	private XMLEntryReader xmlReader;
+	// The EntryXMLWriter that allows removal of entries
+	private EntryXMLWriter xmlWriter;
 	
 	/**
 	 * Checks if the user's data file exists. If it doesn't, creates it
@@ -43,6 +46,7 @@ public class MainWindowBackend {
 			createNewUserDataFile();
 		}
 		
+		this.xmlWriter = new EntryXMLWriter();
 		this.xmlReader = new XMLEntryReader(this.userDataFile);
 	}
 	
@@ -97,6 +101,16 @@ public class MainWindowBackend {
 	public boolean userDataFileExists() {
 		return this.userDataFile.exists();
 	}
+	
+	
+	/**
+	 * 
+	 * @param entryName
+	 */
+	public void removeEntry(String entryName) {
+		this.xmlWriter.removeEntryFromXML(entryName);
+	}
+	
 
 	/**
 	 * Returns an ArrayList of user entries of a given type

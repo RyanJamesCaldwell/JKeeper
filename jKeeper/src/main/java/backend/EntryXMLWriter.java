@@ -51,6 +51,38 @@ public class EntryXMLWriter {
 	}
 	
 	/**
+	 * Removes an entry from the userData.xml file
+	 * 
+	 * @param entryName
+	 */
+	public void removeEntryFromXML(String entryName) {
+		Document dom;
+	    
+	    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+	    
+	    // Open the existing userData.xml document to write to it
+		try {
+	        DocumentBuilder db = dbf.newDocumentBuilder();
+	        dom = db.parse(this.userFile);
+	        
+	        NodeList entries = dom.getElementsByTagName("entry");
+	        
+	        NamedNodeMap attributes;
+	        for(int i = 0; i < entries.getLength(); i++) {
+	        	attributes = entries.item(i).getAttributes();
+	        	if(attributes.getNamedItem("name").getTextContent().equals(entryName)) {
+	        		entries.item(i).getParentNode().removeChild(entries.item(i));
+	        	}
+	        }
+	        
+	        this.writeToFile(dom);
+	        
+		} catch (Exception e1) {
+			System.err.println("Exception encountered when writing to userData.xml file.");
+		}
+	}
+	
+	/**
 	 * Writes a ComputerEntry to the user's userData.xml file
 	 * 
 	 * @param newEntry A ComputerEntry to be written to the userData.xml file
@@ -69,7 +101,6 @@ public class EntryXMLWriter {
 	 */
 	private void writeDefaults(BasicEntry newEntry) {
 		Document dom;
-	    Element e = null;
 	    
 	    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 	    

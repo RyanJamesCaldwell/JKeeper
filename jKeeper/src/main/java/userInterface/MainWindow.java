@@ -136,6 +136,13 @@ public class MainWindow {
 		JButton btnRemoveEntry = new JButton("Remove Entry");
 		btnRemoveEntry.setBounds(503, 291, 123, 23);
 		mainWindow.getContentPane().add(btnRemoveEntry);
+		btnRemoveEntry.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent arg0) {
+				if(list.getSelectedValue() != null) {
+					mainWindowBackend.removeEntry(list.getSelectedValue());
+				}
+			}
+		});
 		
 		JButton btnViewEntry = new JButton("View Entry");
 		btnViewEntry.setBounds(30, 291, 123, 23);
