@@ -23,7 +23,7 @@ import entries.LoginEntry;
  * This class reads the userData.xml file and retrieves all of the entries.
  * 
  * @author Ryan Caldwell
- * @version Version 1.0, 17-AUG-2017
+ * @version Version 1.0, 18-AUG-2017
  */
 public class XMLEntryReader {
 
@@ -116,7 +116,6 @@ public class XMLEntryReader {
 		} catch (Exception e) {
 			System.err.println("Error opening the userData.xml file for parsing.");
 		}
-		System.out.println(this.allEntries.size());
 	}
 	
 	// Creates an instance of a ComputerEntry and adds it to the ArrayList "allEntries"
@@ -177,7 +176,7 @@ public class XMLEntryReader {
 
 	/**
 	 * Returns the ArrayList of entries in the userData.xml file. This ArrayList can be updated by
-	 * calling fetchAllEntries().
+	 * calling updateAllEntries().
 	 * 
 	 * @return Returns the ArrayList of entries in the userData.xml file
 	 */

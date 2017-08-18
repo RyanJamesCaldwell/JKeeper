@@ -47,6 +47,9 @@ public class AddEntryWindow extends JFrame {
 		defaultWindowOptions();
 	}
 	
+	/**
+	 * Sets the UI components that are common to all entry additions
+	 */
 	private void defaultWindowOptions() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Add New Entry");
@@ -116,11 +119,13 @@ public class AddEntryWindow extends JFrame {
 		setVisible(true);
 	}
 	
+	// Centers the window in the middle of the user's screen
 	private void centerWindow(){
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		setLocation(dim.width/2-getSize().width/2, dim.height/2-getSize().height/2);
 	}
 	
+	// Shows the "simple" UI for ComputerEntrys and LoginEntrys
 	private void showSimpleUI(String type) {
 		setTitle("Add New Entry");
 		setBounds(100, 100, 450, 458);
@@ -203,6 +208,7 @@ public class AddEntryWindow extends JFrame {
 		contentPane.add(btnAddEntry);
 	}
 	
+	// Shows the UI for adding a CreditCardEntry
 	private void showCreditCardUI(String type) {
 		setTitle("Add Credit Card Entry");
 		setBounds(100, 100, 450, 458);

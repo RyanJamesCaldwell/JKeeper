@@ -3,7 +3,6 @@ package backend;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.xml.parsers.DocumentBuilder;
@@ -20,9 +19,6 @@ import org.w3c.dom.Document;
 import org.w3c.dom.Element;
 
 import entries.BasicEntry;
-import entries.ComputerEntry;
-import entries.CreditCardEntry;
-import entries.LoginEntry;
 
 /**
  * The back end logic that is attached to MainWindow
@@ -58,7 +54,6 @@ public class MainWindowBackend {
 			this.userDataFile.createNewFile();
 			
 			Document dom;
-		    Element e = null;
 		    
 		    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 			try {
@@ -87,8 +82,7 @@ public class MainWindowBackend {
 		            System.err.println(ioe.getMessage());
 		        }
 			} catch (ParserConfigurationException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
+				System.err.println(e1.getMessage());
 			}
 		} catch (IOException e) {
 			System.err.println("Error: Could not create user data file.");
@@ -112,29 +106,28 @@ public class MainWindowBackend {
 	 * @return Returns an ArrayList of 
 	 */
 	public ArrayList<BasicEntry> getEntriesByType(int type) {
-		// TODO read the file, get entries of a type, return arraylist of that type
-		ArrayList<BasicEntry> listOfEntries;
 		
-		switch(type){
-		case 0:
-			this.xmlReader.getEntriesByType(0);
-			break;
-		case 1:
-			this.xmlReader.getEntriesByType(1);
-			break;
-		case 2:
-			this.xmlReader.getEntriesByType(2);
-			break;
-		case 3:
-			
-			break;
-		default:
-			break;
-		}
+		this.xmlReader.getEntriesByType(type);
+		
 		this.entriesCurrentlyDisplayed = this.xmlReader.getCurrentEntries();
 		
 		return this.xmlReader.getCurrentEntries();
 	}
+	
+	/**
+	 * Returns an ArrayList of all user entries in the userData.xml file
+	 * 
+	 * @return Returns an ArrayList of all current entries
+	 */
+	public ArrayList<BasicEntry> getAllEntries() {
+		
+		this.xmlReader.updateAllEntries();
+		
+		this.entriesCurrentlyDisplayed = this.xmlReader.getCurrentEntries();
+		
+		return this.xmlReader.getCurrentEntries();
+	}
+	
 	
 	public ArrayList<BasicEntry> getEntriesCurrentlyDisplayed() {
 		return this.entriesCurrentlyDisplayed;
