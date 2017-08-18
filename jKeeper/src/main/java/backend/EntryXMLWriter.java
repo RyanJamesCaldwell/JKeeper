@@ -13,7 +13,6 @@ import javax.xml.parsers.*;
 import javax.xml.transform.*;
 import javax.xml.transform.dom.*;
 import javax.xml.transform.stream.*;
-import org.xml.sax.*;
 import org.w3c.dom.*;
 
 /**
@@ -152,7 +151,6 @@ public class EntryXMLWriter {
 		}
 		else {
 			Document dom;
-		    Element e = null;
 		    
 		    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 		    

@@ -1,6 +1,5 @@
 package userInterface;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
@@ -20,7 +19,6 @@ import entries.CreditCardEntry;
 import entries.LoginEntry;
 
 import javax.swing.JButton;
-import javax.swing.JSeparator;
 
 /**
  * JFrame window for adding a new entry
