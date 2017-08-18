@@ -20,7 +20,7 @@ import org.w3c.dom.*;
  * Class is used for writing new entries to the userData.xml file
  * 
  * @author Ryan Caldwell
- * @version Version 1.0, 15-AUG-2017
+ * @version Version 1.0, 17-AUG-2017
  */
 public class EntryXMLWriter {
 
@@ -103,22 +103,7 @@ public class EntryXMLWriter {
 	        
 	        rootElement.item(0).appendChild(newEntryItem);
 	        
-	        try {
-	            Transformer tr = TransformerFactory.newInstance().newTransformer();
-	            tr.setOutputProperty(OutputKeys.INDENT, "yes");
-	            tr.setOutputProperty(OutputKeys.METHOD, "xml");
-	            tr.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-	            tr.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
-	            FileOutputStream fos = new FileOutputStream(this.userFile);
-	            // send DOM to file
-	            tr.transform(new DOMSource(dom), 
-	                                 new StreamResult(fos));
-	            fos.close();
-	        } catch (TransformerException te) {
-	            System.err.println(te.getMessage());
-	        } catch (IOException ioe) {
-	            System.err.println(ioe.getMessage());
-	        }
+	        this.writeToFile(dom);
 	        
 		} catch (Exception e1) {
 			System.err.println("Exception encountered when writing to userData.xml file.");
@@ -179,26 +164,35 @@ public class EntryXMLWriter {
 		        
 		        rootElement.item(0).appendChild(newEntryItem);
 		        
-		        try {
-		            Transformer tr = TransformerFactory.newInstance().newTransformer();
-		            tr.setOutputProperty(OutputKeys.INDENT, "yes");
-		            tr.setOutputProperty(OutputKeys.METHOD, "xml");
-		            tr.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
-		            tr.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
-		            FileOutputStream fos = new FileOutputStream(this.userFile);
-		            // send DOM to file
-		            tr.transform(new DOMSource(dom), 
-		                                 new StreamResult(fos));
-		            fos.close();
-		        } catch (TransformerException te) {
-		            System.err.println(te.getMessage());
-		        } catch (IOException ioe) {
-		            System.err.println(ioe.getMessage());
-		        }
+		        this.writeToFile(dom);
 		        
 			} catch (Exception e1) {
 				System.err.println("Exception encountered when writing to userData.xml file.");
 			}
 		}
+	}
+	
+	/**
+	 * Writes the Document to the user's userData.xml file
+	 * 
+	 * @param dom The document that will be written back to the userData.xml file
+	 */
+	private void writeToFile(Document dom) {
+		try {
+            Transformer tr = TransformerFactory.newInstance().newTransformer();
+            tr.setOutputProperty(OutputKeys.INDENT, "yes");
+            tr.setOutputProperty(OutputKeys.METHOD, "xml");
+            tr.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
+            tr.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
+            FileOutputStream fos = new FileOutputStream(this.userFile);
+            // send DOM to file
+            tr.transform(new DOMSource(dom), 
+                                 new StreamResult(fos));
+            fos.close();
+        } catch (TransformerException te) {
+            System.err.println(te.getMessage());
+        } catch (IOException ioe) {
+            System.err.println(ioe.getMessage());
+        }
 	}
 }
