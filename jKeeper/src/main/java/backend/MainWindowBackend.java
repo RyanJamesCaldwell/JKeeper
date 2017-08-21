@@ -116,8 +116,8 @@ public class MainWindowBackend {
 	 * Returns an ArrayList of user entries of a given type
 	 * 
 	 * @param type Different types that the user can retrieve from the user data file. 
-	 * Type 0: "Login". Type 1: "Computer". Type 2: "Credit Card".
-	 * @return Returns an ArrayList of 
+	 * Type 0: "Login". Type 1: "Computer". Type 2: "Credit Card". Type 3: All entries.
+	 * @return Returns an ArrayList of BasicEntrys
 	 */
 	public ArrayList<BasicEntry> getEntriesByType(int type) {
 		

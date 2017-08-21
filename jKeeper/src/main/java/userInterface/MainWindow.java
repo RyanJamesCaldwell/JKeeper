@@ -61,6 +61,8 @@ public class MainWindow {
 		//TODO get all entries in file returns ArrayList<String> allEntries
 		//populateItemList(ArrayList<String> allEntries)
 		this.mainWindow.setVisible(true);
+		
+		this.populateItemList(ENTRY_TYPE_ALL);
 	}
 
 	// Generates the needed user interface
@@ -205,6 +207,7 @@ public class MainWindow {
 	
 	// This will read a file and populate the list of existing items
 	// @params type The type you want to populate
+	// Type 0: "Login". Type 1: "Computer". Type 2: "Credit Card". Type 3: All entries. 
 	private void populateItemList(int type) {
 		this.itemList.clear();
 		

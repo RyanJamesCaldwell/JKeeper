@@ -52,7 +52,7 @@ public class EntryXMLWriter {
 	/**
 	 * Removes an entry from the userData.xml file
 	 * 
-	 * @param entryName
+	 * @param entryName The name of the entry that will be removed
 	 */
 	public void removeEntryFromXML(String entryName) {
 		Document dom;
@@ -70,14 +70,15 @@ public class EntryXMLWriter {
 	        for(int i = 0; i < entries.getLength(); i++) {
 	        	attributes = entries.item(i).getAttributes();
 	        	if(attributes.getNamedItem("name").getTextContent().equals(entryName)) {
-	        		entries.item(i).getParentNode().removeChild(entries.item(i));
+	        		Node itemToRemove = entries.item(i);
+	        		itemToRemove.getParentNode().removeChild(itemToRemove);
 	        	}
 	        }
 	        
 	        this.writeToFile(dom);
 	        
 		} catch (Exception e1) {
-			System.err.println("Exception encountered when writing to userData.xml file.");
+			System.err.println("Exception encountered when removing node from userData.xml file.");
 		}
 	}
 	
@@ -95,9 +96,7 @@ public class EntryXMLWriter {
 		}
 	}
 	
-	/**
-	 * Writes the type, name, username, password, URL, and email to the file
-	 */
+	// Writes the type, name, username, password, URL, and email to the file
 	private void writeDefaults(BasicEntry newEntry) {
 		Document dom;
 	    
@@ -201,11 +200,9 @@ public class EntryXMLWriter {
 		}
 	}
 	
-	/**
-	 * Writes the Document to the user's userData.xml file
-	 * 
-	 * @param dom The document that will be written back to the userData.xml file
-	 */
+	// Writes the Document to the user's userData.xml file
+	// 
+	// @param dom The document that will be written back to the userData.xml file
 	private void writeToFile(Document dom) {
 		try {
             Transformer tr = TransformerFactory.newInstance().newTransformer();

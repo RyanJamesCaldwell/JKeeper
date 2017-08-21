@@ -106,6 +106,16 @@ public class XMLEntryReader {
 							createCreditCardEntry(nl.item(i));
 						}
 						break;
+					case 3:
+						if(attributeNames.getNamedItem("type").getTextContent().equals("Login")) {
+							createLoginEntry(nl.item(i));
+						}
+						else if(attributeNames.getNamedItem("type").getTextContent().equals("Computer")) {
+							createComputerEntry(nl.item(i));
+						}
+						else if(attributeNames.getNamedItem("type").getTextContent().equals("Credit Card")) {
+							createCreditCardEntry(nl.item(i));
+						}
 					default:
 						break;
 				}
