@@ -28,6 +28,7 @@ import javax.swing.JButton;
  */
 public class AddEntryWindow extends JFrame {
 
+	private static final long serialVersionUID = 8053793453165823745L;
 	private JPanel contentPane;
 	private JTextField txtEntryName;
 	private JTextField txtEntryUsername;
@@ -74,10 +75,10 @@ public class AddEntryWindow extends JFrame {
 		contentPane.add(btnCreditCard);
 		btnCreditCard.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				btnCreditCard.hide();
-				btnComputer.hide();
-				btnLogin.hide();
-				lblSelectANew.hide();
+				btnCreditCard.setVisible(false);
+				btnComputer.setVisible(false);
+				btnLogin.setVisible(false);
+				lblSelectANew.setVisible(false);
 				showCreditCardUI("Credit Card");
 			}
 		});
@@ -86,10 +87,10 @@ public class AddEntryWindow extends JFrame {
 		contentPane.add(btnComputer);
 		btnComputer.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				btnCreditCard.hide();
-				btnComputer.hide();
-				btnLogin.hide();
-				lblSelectANew.hide();
+				btnCreditCard.setVisible(false);
+				btnComputer.setVisible(false);
+				btnLogin.setVisible(false);
+				lblSelectANew.setVisible(false);
 				showSimpleUI("Computer");
 			}
 		});
@@ -98,10 +99,10 @@ public class AddEntryWindow extends JFrame {
 		contentPane.add(btnLogin);
 		btnLogin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent arg0) {
-				btnCreditCard.hide();
-				btnComputer.hide();
-				btnLogin.hide();
-				lblSelectANew.hide();
+				btnCreditCard.setVisible(false);
+				btnComputer.setVisible(false);
+				btnLogin.setVisible(false);
+				lblSelectANew.setVisible(false);
 				showSimpleUI("Login");
 			}
 		});

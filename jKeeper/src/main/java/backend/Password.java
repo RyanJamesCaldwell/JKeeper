@@ -1,9 +1,9 @@
 package backend;
 
-import java.util.Arrays;
-import java.util.Scanner;
-
-import org.apache.commons.codec.digest.DigestUtils;
+//import java.util.Arrays;
+//import java.util.Scanner;
+//
+//import org.apache.commons.codec.digest.DigestUtils;
 
 /**
  * 
@@ -15,11 +15,11 @@ import org.apache.commons.codec.digest.DigestUtils;
  */
 public class Password {
 	
-	private String password;
-	private String SALT = "random-salt-string";
+	//private String password;
+	//private String SALT = "random-salt-string";
 
-	public Password(String desiredPassword) {
-		this.password = desiredPassword;
+	public Password() {
+	
 	}
 
 	public void saltPassword() {

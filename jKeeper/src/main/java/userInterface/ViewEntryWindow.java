@@ -24,6 +24,7 @@ import java.awt.Toolkit;
  */
 public class ViewEntryWindow extends JFrame {
 
+	private static final long serialVersionUID = 4948005554005458345L;
 	// Content pane to be added to 
 	private JPanel contentPane;
 	// Entry that is to be viewed in the JFrame window
@@ -69,7 +70,7 @@ public class ViewEntryWindow extends JFrame {
 	 * Sets up UI aspects that are common to all entries
 	 */
 	private void setupInitialUI() {
-		setDefaultCloseOperation(this.DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);

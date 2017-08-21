@@ -37,8 +37,6 @@ public class LoginWindow {
 	private LoginBackend loginBackend;
 	// Verifies the environment and dependencies
 	private EnvironmentVerifier environmentVerifier;
-	// Main window the user sees after logging in
-	private MainWindow mainWindow;
 
 	/**
 	 * Verify that the user has an AppData folder. If they do not, close the program.
@@ -103,8 +101,8 @@ public class LoginWindow {
 				else {
 					// If logged in successfully, hide this window and open the manager
 					if(loginBackend.login(pwdPasswordField.getPassword())) {
-						frmJkeeperPasswordManager.hide();
-						mainWindow = new MainWindow();
+						frmJkeeperPasswordManager.setVisible(false);
+						new MainWindow();
 					}
 					// If login fails, display an error message
 					else {
