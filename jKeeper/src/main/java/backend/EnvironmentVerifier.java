@@ -37,7 +37,7 @@ public class EnvironmentVerifier {
 	 * 
 	 * @return Returns true if user profile exists, false if not.
 	 */
-	public boolean hasUserProfile() {
+	public final boolean hasUserProfile() {
 		return this.userProfile.exists();
 	}
 
@@ -46,14 +46,14 @@ public class EnvironmentVerifier {
 	 * 
 	 * @return Returns true if AppData folder is found, false if not.
 	 */
-	public boolean correctOS() {
+	public final boolean correctOS() {
 		return this.appDataFolder.exists();
 	}
 
 	/**
 	 * Creates the JKeeper folder in the APPDATA folder and creates the user's profile.
 	 */
-	public void setupEnvironment() {
+	public final void setupEnvironment() {
 		File JKeeperFolder;
 		JKeeperFolder = new File(System.getenv("APPDATA") + "/jKeeper");
 		JKeeperFolder.mkdir();
@@ -68,7 +68,7 @@ public class EnvironmentVerifier {
 	/**
 	 * Writes user's password to the user profile.
 	 */
-	public void generateInitialProfile() {
+	public final void generateInitialProfile() {
 		try {
 			this.fileWriter = new PrintWriter(this.userProfile);
 			String desiredAccountName = JOptionPane.showInputDialog(null, "Please enter your desired account name: ");

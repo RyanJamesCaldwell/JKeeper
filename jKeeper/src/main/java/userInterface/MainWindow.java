@@ -66,7 +66,7 @@ public class MainWindow {
 	}
 
 	// Generates the needed user interface
-	private void initialize() {
+	private final void initialize() {
 		mainWindow = new JFrame();
 		mainWindow.setResizable(false);
 		mainWindow.setTitle("jKeeper Password Manager");
@@ -208,7 +208,7 @@ public class MainWindow {
 	// This will read a file and populate the list of existing items
 	// @params type The type you want to populate
 	// Type 0: "Login". Type 1: "Computer". Type 2: "Credit Card". Type 3: All entries. 
-	private void populateItemList(int type) {
+	private final void populateItemList(int type) {
 		this.itemList.clear();
 		
 		ArrayList<BasicEntry> itemsToPopulate;

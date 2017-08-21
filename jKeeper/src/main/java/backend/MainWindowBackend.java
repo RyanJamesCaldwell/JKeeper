@@ -53,7 +53,7 @@ public class MainWindowBackend {
 	/**
 	 * Creates a new user data file with the root element
 	 */
-	private void createNewUserDataFile() {
+	private final void createNewUserDataFile() {
 		try {
 			this.userDataFile.createNewFile();
 			
@@ -98,7 +98,7 @@ public class MainWindowBackend {
 	 * 
 	 * @return Returns true if file exists, false if it does not
 	 */
-	public boolean userDataFileExists() {
+	public final boolean userDataFileExists() {
 		return this.userDataFile.exists();
 	}
 	
@@ -107,7 +107,7 @@ public class MainWindowBackend {
 	 * 
 	 * @param entryName
 	 */
-	public void removeEntry(String entryName) {
+	public final void removeEntry(String entryName) {
 		this.xmlWriter.removeEntryFromXML(entryName);
 	}
 	
@@ -119,7 +119,7 @@ public class MainWindowBackend {
 	 * Type 0: "Login". Type 1: "Computer". Type 2: "Credit Card". Type 3: All entries.
 	 * @return Returns an ArrayList of BasicEntrys
 	 */
-	public ArrayList<BasicEntry> getEntriesByType(int type) {
+	public final ArrayList<BasicEntry> getEntriesByType(int type) {
 		
 		this.xmlReader.getEntriesByType(type);
 		
@@ -133,7 +133,7 @@ public class MainWindowBackend {
 	 * 
 	 * @return Returns an ArrayList of all current entries
 	 */
-	public ArrayList<BasicEntry> getAllEntries() {
+	public final ArrayList<BasicEntry> getAllEntries() {
 		
 		this.xmlReader.updateAllEntries();
 		
@@ -143,7 +143,7 @@ public class MainWindowBackend {
 	}
 	
 	
-	public ArrayList<BasicEntry> getEntriesCurrentlyDisplayed() {
+	public final ArrayList<BasicEntry> getEntriesCurrentlyDisplayed() {
 		return this.entriesCurrentlyDisplayed;
 	}
 

@@ -26,7 +26,7 @@ public class LoginBackend {
 	 * @param attemptedPassword - The password entered by the user in the login window.
 	 * @return Returns true if the password entered equals the user's account password, false otherwise.
 	 */
-	public boolean login(char[] attemptedPassword) {
+	public final boolean login(char[] attemptedPassword) {
 		String attemptedPasswordString = new String(attemptedPassword);
 		return attemptedPasswordString.equals(readLoginPassword());
 	}
@@ -35,7 +35,7 @@ public class LoginBackend {
 	//
 	// @return Returns null if there was an error reading from the user profile, returns
 	// the user's password otherwise.
-	private String readLoginPassword() {
+	private final String readLoginPassword() {
 		String password = null;
 		
 		CSVReader readUserProfile = new CSVReader(this.userProfile);

@@ -48,7 +48,7 @@ public class AddEntryWindow extends JFrame {
 	/**
 	 * Sets the UI components that are common to all entry additions
 	 */
-	private void defaultWindowOptions() {
+	private final void defaultWindowOptions() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setTitle("Add New Entry");
 		setBounds(100, 100, 450, 171);

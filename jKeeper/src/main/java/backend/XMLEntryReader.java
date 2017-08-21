@@ -43,7 +43,7 @@ public class XMLEntryReader {
 	/**
 	 * Fetches all the entries from the userData.xml file and updates the ArrayList of entries.
 	 */
-	public void updateAllEntries() {
+	public final void updateAllEntries() {
 		this.allEntries.clear();
 		
 		DocumentBuilderFactory dbFactory = DocumentBuilderFactory.newInstance();

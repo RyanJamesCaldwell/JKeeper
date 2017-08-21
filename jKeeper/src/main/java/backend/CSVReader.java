@@ -42,7 +42,7 @@ public class CSVReader {
 	 * @param fileToRead - The file being tested to see if it is a CSV file.
 	 * @return Returns true if the file is a CSV file, false if other type of file.
 	 */
-	public boolean verifyCSVFile(File fileToRead) {
+	public final boolean verifyCSVFile(File fileToRead) {
 		String extension = "";
 		int i = fileToRead.toString().lastIndexOf(".");
 		if(i > 0) {
@@ -57,7 +57,7 @@ public class CSVReader {
 	 * @return Returns null if there was an error reading from the user profile, returns
 	 * the user's password otherwise.
 	 */
-	public String getAccountPassword() {
+	public final String getAccountPassword() {
 		String line = null;
 		String[] splitAccountLine;
 		String password = null;
@@ -79,7 +79,7 @@ public class CSVReader {
 	 * @return Returns null if there was an error reading from the user profile, returns
 	 * the user's account name otherwise.
 	 */
-	public String getAccountName() {
+	public final String getAccountName() {
 		String line = null;
 		String[] splitAccountLine;
 		String accountName = null;
@@ -97,7 +97,7 @@ public class CSVReader {
 	
 	// Opens the user profile to be read by a BufferedReader
 	// @return Returns true if the file was opened without error, false otherwise
-	private boolean openUserProfile() {
+	private final boolean openUserProfile() {
 		boolean successfullyOpened = false;
 		
 		try {
@@ -116,7 +116,7 @@ public class CSVReader {
 	 * 
 	 * @return Returns true if successfully closed, false otherwise.
 	 */
-	public boolean closeUserProfile() {
+	public final boolean closeUserProfile() {
 		boolean successfullyClosed = false;
 		
 		try {
