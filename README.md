@@ -1,6 +1,4 @@
-<p align="center">
-  <h1>jKeeper - Desktop Password Manager</h1>
-</p>
+<h1 align="center">jKeeper - Desktop Password Manager</h1>
 jKeeper is a Java desktop application for safely managing all of your private account information.
 
 Maven Dependencies:
