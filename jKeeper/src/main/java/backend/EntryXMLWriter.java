@@ -50,13 +50,14 @@ public class EntryXMLWriter {
 	}
 	
 	/**
-	 * Removes an entry from the userData.xml file
+	 * Removes an entry from the userData.xml file by searching by name
 	 * 
 	 * @param entryName The name of the entry that will be removed
+	 * @return Returns true if the entry was successfully found and removed, false otherwise.
 	 */
-	public void removeEntryFromXML(String entryName) {
+	public boolean removeEntryFromXML(String entryName) {
 		Document dom;
-	    
+	    boolean foundNode = false;
 	    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
 	    
 	    // Open the existing userData.xml document to write to it
@@ -70,16 +71,21 @@ public class EntryXMLWriter {
 	        for(int i = 0; i < entries.getLength(); i++) {
 	        	attributes = entries.item(i).getAttributes();
 	        	if(attributes.getNamedItem("name").getTextContent().equals(entryName)) {
+	        		foundNode = true;
 	        		Node itemToRemove = entries.item(i);
 	        		itemToRemove.getParentNode().removeChild(itemToRemove);
 	        	}
 	        }
 	        
-	        this.writeToFile(dom);
+	        if(foundNode) {
+	        	this.writeToFile(dom);
+	        }
 	        
 		} catch (Exception e1) {
 			System.err.println("Exception encountered when removing node from userData.xml file.");
 		}
+		
+		return foundNode;
 	}
 	
 	/**
