@@ -7,7 +7,7 @@ package entries;
  * @author Ryan Caldwell
  * @version Version 1.0, 11-AUG-2017
  */
-public interface Entry {
+interface Entry {
 	public String getEntryName();
 	
 	public void setEntryName(String newEntryName);

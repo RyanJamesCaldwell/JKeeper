@@ -39,6 +39,11 @@ public abstract class BasicEntry implements Entry {
 	}
 	
 	/**
+	 * User needs to implement this abstract method, returning the type of entry
+	 */
+	public abstract String getEntryType();
+	
+	/**
 	 * Sets the value of the entry's name
 	 * 
 	 * @param newEntryName The new name of the entry
