@@ -8,7 +8,7 @@ package entries;
  * @version Version 1.0, 11-AUG-2017
  */
 public class ComputerEntry extends BasicEntry {
-
+	
 	/**
 	 * Sets the values of the attributes of a ComputerEntry to an empty string
 	 */

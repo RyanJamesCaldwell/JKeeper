@@ -19,17 +19,21 @@ import org.w3c.dom.*;
  * Class is used for writing new entries to the userData.xml file
  * 
  * @author Ryan Caldwell
- * @version Version 1.0, 17-AUG-2017
+ * @version Version 1.0, 28-AUG-2017
  */
 public class EntryXMLWriter {
 
 	// File containing the user's entry data
 	private File userFile;
+	// DocumentBuilder used for writing to XML file
+	private DocumentBuilder db;
+	// Generates new DocumentBuilder instance
+	private DocumentBuilderFactory dbf;
+	// The index of the root element; this has new child nodes (entries) appended to it
+	private final int ROOT_ELEMENT_INDEX = 0;
 	
 	/**
 	 * Takes a BasicEntry as a parameter to write to the userData.xml file
-	 * 
-	 * @param newEntry Any BasicEntry to write to the userData.xml file
 	 */
 	public EntryXMLWriter() {
 		userFile = new File(System.getenv("APPDATA") + "/jKeeper/userData.xml");
@@ -50,7 +54,7 @@ public class EntryXMLWriter {
 	}
 	
 	/**
-	 * Removes an entry from the userData.xml file by searching by name
+	 * Removes an entry from the userData.xml file by searching by entry name
 	 * 
 	 * @param entryName The name of the entry that will be removed
 	 * @return Returns true if the entry was successfully found and removed, false otherwise.
@@ -58,12 +62,12 @@ public class EntryXMLWriter {
 	public boolean removeEntryFromXML(String entryName) {
 		Document dom;
 	    boolean foundNode = false;
-	    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+	    this.dbf = DocumentBuilderFactory.newInstance();
 	    
 	    // Open the existing userData.xml document to write to it
 		try {
-	        DocumentBuilder db = dbf.newDocumentBuilder();
-	        dom = db.parse(this.userFile);
+	        this.db = dbf.newDocumentBuilder();
+	        dom = this.db.parse(this.userFile);
 	        
 	        NodeList entries = dom.getElementsByTagName("entry");
 	        
@@ -106,12 +110,12 @@ public class EntryXMLWriter {
 	private void writeDefaults(BasicEntry newEntry) {
 		Document dom;
 	    
-	    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+	    this.dbf = DocumentBuilderFactory.newInstance();
 	    
 	    // Open the existing userData.xml document to write to it
 		try {
-	        DocumentBuilder db = dbf.newDocumentBuilder();
-	        dom = db.parse(this.userFile);
+	        this.db = this.dbf.newDocumentBuilder();
+	        dom = this.db.parse(this.userFile);
 	        
 	        NodeList rootElement = dom.getElementsByTagName("entries");
 	        Element newElement;
@@ -136,7 +140,7 @@ public class EntryXMLWriter {
 	        newElement.setTextContent(newEntry.getEntryEmail());
 	        newEntryItem.appendChild(newElement);
 	        
-	        rootElement.item(0).appendChild(newEntryItem);
+	        rootElement.item(ROOT_ELEMENT_INDEX).appendChild(newEntryItem);
 	        
 	        this.writeToFile(dom);
 	        
@@ -157,12 +161,12 @@ public class EntryXMLWriter {
 		else {
 			Document dom;
 		    
-		    DocumentBuilderFactory dbf = DocumentBuilderFactory.newInstance();
+		    this.dbf = DocumentBuilderFactory.newInstance();
 		    
 		    // Open the existing userData.xml document to write to it
 			try {
-		        DocumentBuilder db = dbf.newDocumentBuilder();
-		        dom = db.parse(this.userFile);
+		       this.db = this.dbf.newDocumentBuilder();
+		        dom = this.db.parse(this.userFile);
 		        
 		        NodeList rootElement = dom.getElementsByTagName("entries");
 		        Element newElement;
@@ -196,7 +200,7 @@ public class EntryXMLWriter {
 		        newElement.setTextContent(newEntry.getSecurityCode());
 		        newEntryItem.appendChild(newElement);
 		        
-		        rootElement.item(0).appendChild(newEntryItem);
+		        rootElement.item(ROOT_ELEMENT_INDEX).appendChild(newEntryItem);
 		        
 		        this.writeToFile(dom);
 		        
