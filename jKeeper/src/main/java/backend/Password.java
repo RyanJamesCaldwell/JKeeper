@@ -1,7 +1,5 @@
 package backend;
 
-import java.security.NoSuchAlgorithmException;
-import java.security.spec.InvalidKeySpecException;
 import java.security.spec.KeySpec;
 import java.util.Arrays;
 
@@ -18,18 +16,30 @@ import javax.crypto.spec.PBEKeySpec;
  */
 public final class Password {
 	
+	// The encryption algorithm that is going to be used
 	private final String ALGORITHM = "PBKDF2WithHmacSHA1";
+	// The String version of the password that the user wants to encrypt
 	private String password;
 	private final int DERIVED_KEY_LENGTH = 160;
 	private final int ITERATIONS = 20000;
 	private final byte[] SALT;
 
-	private Password(String newPassword) {
+	/**
+	 * Creates a new password to be encrypted
+	 * 
+	 * @param newPassword
+	 */
+	public Password(String newPassword) {
 		this.password = newPassword;
 		String tempSalt = "SALT2345";
 		this.SALT = tempSalt.getBytes();
 	}
 	
+	/**
+	 * Salts and encrypts the user's password sent into the constructor
+	 * 
+	 * @return Returns the user's password after salting and encryption
+	 */
 	public byte[] getEncryptedPassword() {
 		KeySpec spec = new PBEKeySpec(password.toCharArray(), SALT, ITERATIONS, DERIVED_KEY_LENGTH);
 		SecretKeyFactory f;
@@ -45,6 +55,12 @@ public final class Password {
 		return encryptedPass;
 	}
 	
+	/**
+	 * Checks if one password is equal to another
+	 * 
+	 * @param otherEncryptedPassword A password to be compared
+	 * @return Returns true if they are equal, false otherwise
+	 */
 	public boolean equals(byte[] otherEncryptedPassword) {
 		return Arrays.equals(getEncryptedPassword(), otherEncryptedPassword);
 	}
