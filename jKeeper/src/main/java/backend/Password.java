@@ -1,9 +1,12 @@
 package backend;
 
-//import java.util.Arrays;
-//import java.util.Scanner;
-//
-//import org.apache.commons.codec.digest.DigestUtils;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
+import java.security.spec.KeySpec;
+import java.util.Arrays;
+
+import javax.crypto.SecretKeyFactory;
+import javax.crypto.spec.PBEKeySpec;
 
 /**
  * 
@@ -11,43 +14,43 @@ package backend;
  * it isn't store in plain text.
  * 
  * @author Ryan Caldwell
- * @version Version 1.0, 10-AUG-2017
+ * @version Version 1.0, 28-AUG-2017
  */
-public class Password {
+public final class Password {
 	
-	//private String password;
-	//private String SALT = "random-salt-string";
+	private final String ALGORITHM = "PBKDF2WithHmacSHA1";
+	private String password;
+	private final int DERIVED_KEY_LENGTH = 160;
+	private final int ITERATIONS = 20000;
+	private final byte[] SALT;
 
-	public Password() {
+	private Password(String newPassword) {
+		this.password = newPassword;
+		String tempSalt = "SALT2345";
+		this.SALT = tempSalt.getBytes();
+	}
 	
-	}
-
-	public void saltPassword() {
-		// TODO Auto-generated method stub
+	public byte[] getEncryptedPassword() {
+		KeySpec spec = new PBEKeySpec(password.toCharArray(), SALT, ITERATIONS, DERIVED_KEY_LENGTH);
+		SecretKeyFactory f;
+		byte[] encryptedPass = null;
 		
+		try {
+			f = SecretKeyFactory.getInstance(ALGORITHM);
+			encryptedPass = f.generateSecret(spec).getEncoded();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} 
+
+		return encryptedPass;
 	}
-
-	public void hashPassword() {
-		// TODO Auto-generated method stub
-		
+	
+	public boolean equals(byte[] otherEncryptedPassword) {
+		return Arrays.equals(getEncryptedPassword(), otherEncryptedPassword);
 	}
-
-	public void getHashedPassword() {
-		
+	
+	public static void main(String[] args) {
+		Password hi = new Password("hi");
+		System.out.println(hi.equals(new Password("hi").getEncryptedPassword()));
 	}
-
-
 }
-
-//// Code for comparing hashed passwords
-//byte[] storedPassword = DigestUtils.sha256(this.password + SALT);
-//Scanner scanner = new Scanner(System.in);
-//String attempt = scanner.nextLine();
-//byte[] attemptBytes = DigestUtils.sha256(attempt + SALT);
-//
-//if(Arrays.equals(attemptBytes, storedPassword)) {
-//	System.out.println("That's the correct password!");
-//}
-//else {
-//	System.out.println("That's not correct");
-//}
