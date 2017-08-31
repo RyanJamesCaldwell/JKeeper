@@ -58,8 +58,6 @@ public class MainWindow {
 	public MainWindow() {
 		initialize();
 		this.mainWindowBackend = new MainWindowBackend();
-		//TODO get all entries in file returns ArrayList<String> allEntries
-		//populateItemList(ArrayList<String> allEntries)
 		this.mainWindow.setVisible(true);
 		
 		this.populateItemList(ENTRY_TYPE_ALL);

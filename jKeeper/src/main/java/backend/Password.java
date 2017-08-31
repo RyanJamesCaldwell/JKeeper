@@ -27,7 +27,7 @@ public final class Password {
 	/**
 	 * Creates a new password to be encrypted
 	 * 
-	 * @param newPassword
+	 * @param newPassword A String that the user wants to encrypt
 	 */
 	public Password(String newPassword) {
 		this.password = newPassword;

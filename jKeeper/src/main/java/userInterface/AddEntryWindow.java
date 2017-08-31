@@ -82,6 +82,7 @@ public class AddEntryWindow extends JFrame {
 				showCreditCardUI("Credit Card");
 			}
 		});
+		btnCreditCard.addActionListener(e -> System.out.println(e.toString()));
 		
 		btnComputer.setBounds(299, 88, 98, 23);
 		contentPane.add(btnComputer);

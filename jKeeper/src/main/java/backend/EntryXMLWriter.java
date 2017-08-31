@@ -2,7 +2,6 @@ package backend;
 
 import java.io.File;
 import java.io.FileOutputStream;
-import java.io.IOException;
 
 import entries.BasicEntry;
 import entries.ComputerEntry;
@@ -214,21 +213,22 @@ public class EntryXMLWriter {
 	// 
 	// @param dom The document that will be written back to the userData.xml file
 	private void writeToFile(Document dom) {
+		FileOutputStream fos = null;
+		
 		try {
             Transformer tr = TransformerFactory.newInstance().newTransformer();
             tr.setOutputProperty(OutputKeys.INDENT, "yes");
             tr.setOutputProperty(OutputKeys.METHOD, "xml");
             tr.setOutputProperty(OutputKeys.ENCODING, "UTF-8");
             tr.setOutputProperty("{http://xml.apache.org/xslt}indent-amount", "4");
-            FileOutputStream fos = new FileOutputStream(this.userFile);
+            fos = new FileOutputStream(this.userFile);
             // send DOM to file
             tr.transform(new DOMSource(dom), 
                                  new StreamResult(fos));
             fos.close();
-        } catch (TransformerException te) {
-            System.err.println(te.getMessage());
-        } catch (IOException ioe) {
-            System.err.println(ioe.getMessage());
+        } 
+		catch (Exception e) {
+            System.err.println(e.getMessage());
         }
 	}
 }
