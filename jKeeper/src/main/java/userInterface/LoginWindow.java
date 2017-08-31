@@ -93,8 +93,7 @@ public class LoginWindow {
 		frmJkeeperPasswordManager.getContentPane().add(btnLogin);
 		
 		// Prompt the user for their login password
-		btnLogin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent arg0) {
+		btnLogin.addActionListener(e -> {
 				if(pwdPasswordField.getPassword().length == 0){
 					JOptionPane.showMessageDialog(null, "Please enter your password.");
 				}
@@ -109,7 +108,6 @@ public class LoginWindow {
 						JOptionPane.showMessageDialog(null, "Incorrect password. Please try again.");
 					}
 				}
-			}
 		});
 	}
 }
