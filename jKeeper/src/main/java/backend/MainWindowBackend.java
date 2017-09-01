@@ -24,7 +24,7 @@ import entries.BasicEntry;
  * The back end logic that is attached to MainWindow
  * 
  * @author Ryan Caldwell
- * @version Version 1.0, 14-AUG-2017
+ * @version Version 1.0, 1-SEPT-2017
  */
 public class MainWindowBackend {
 	
@@ -34,8 +34,6 @@ public class MainWindowBackend {
 	private ArrayList<BasicEntry> entriesCurrentlyDisplayed;
 	// The XMLEntryReader that allows users to view their entries in the userData.xml file
 	private XMLEntryReader xmlReader;
-	// The EntryXMLWriter that allows removal of entries
-	private EntryXMLWriter xmlWriter;
 	
 	/**
 	 * Checks if the user's data file exists. If it doesn't, creates it
@@ -46,7 +44,6 @@ public class MainWindowBackend {
 			createNewUserDataFile();
 		}
 		
-		this.xmlWriter = new EntryXMLWriter();
 		this.xmlReader = new XMLEntryReader(this.userDataFile);
 	}
 	
@@ -104,11 +101,12 @@ public class MainWindowBackend {
 	
 	
 	/**
+	 * Removes an entry identified by a its "EntryName"
 	 * 
-	 * @param entryName
+	 * @param entryName The name of an entry
 	 */
 	public final void removeEntry(String entryName) {
-		this.xmlWriter.removeEntryFromXML(entryName);
+		EntryXMLWriter.getInstance().removeEntryFromXML(entryName);
 	}
 	
 
@@ -142,7 +140,11 @@ public class MainWindowBackend {
 		return this.xmlReader.getCurrentEntries();
 	}
 	
-	
+	/**
+	 * Get the entries that are currently being displayed in the UI
+	 * 
+	 * @return Returns the entries that are currently being displayed in the UI
+	 */
 	public final ArrayList<BasicEntry> getEntriesCurrentlyDisplayed() {
 		return this.entriesCurrentlyDisplayed;
 	}

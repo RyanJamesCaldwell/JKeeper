@@ -1,8 +1,6 @@
 package userInterface;
 
 import java.awt.Dimension;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
@@ -91,21 +89,21 @@ public class MainWindow {
 		btnLogin.setBounds(44, 46, 109, 23);
 		mainWindow.getContentPane().add(btnLogin);
 		btnLogin.addActionListener(e -> {
-				populateItemList(ENTRY_TYPE_LOGIN);
+			populateItemList(ENTRY_TYPE_LOGIN);
 		});
 		
 		JButton btnCreditCard = new JButton("Credit Card");
 		btnCreditCard.setBounds(44, 83, 109, 23);
 		mainWindow.getContentPane().add(btnCreditCard);
 		btnCreditCard.addActionListener(e -> {
-				populateItemList(ENTRY_TYPE_CREDIT_CARD);
+			populateItemList(ENTRY_TYPE_CREDIT_CARD);
 		});
 		
 		JButton btnComputer = new JButton("Computer");
 		btnComputer.setBounds(44, 117, 109, 23);
 		mainWindow.getContentPane().add(btnComputer);
 		btnComputer.addActionListener(e -> {
-				populateItemList(ENTRY_TYPE_COMPUTER);
+			populateItemList(ENTRY_TYPE_COMPUTER);
 		});
 		
 		JLabel lblPasswordTypes = new JLabel("Categories");
@@ -118,7 +116,7 @@ public class MainWindow {
 		btnAddEntry.setBounds(186, 291, 123, 23);
 		mainWindow.getContentPane().add(btnAddEntry);
 		btnAddEntry.addActionListener(e -> {
-				new AddEntryWindow();
+			new AddEntryWindow();
 		});
 		
 		JButton btnEditEntry = new JButton("Edit Entry");
@@ -129,19 +127,19 @@ public class MainWindow {
 		btnRemoveEntry.setBounds(503, 291, 123, 23);
 		mainWindow.getContentPane().add(btnRemoveEntry);
 		btnRemoveEntry.addActionListener(e -> {
-				if(list.getSelectedValue() != null) {
-					mainWindowBackend.removeEntry(list.getSelectedValue());
-				}
+			if(list.getSelectedValue() != null) {
+				mainWindowBackend.removeEntry(list.getSelectedValue());
+			}
 		});
 		
 		JButton btnViewEntry = new JButton("View Entry");
 		btnViewEntry.setBounds(30, 291, 123, 23);
 		mainWindow.getContentPane().add(btnViewEntry);
 		btnViewEntry.addActionListener(e -> {
-				int arrayIndex = list.getSelectedIndex();
-				if(arrayIndex != -1){
-					new ViewEntryWindow(mainWindowBackend.getEntriesCurrentlyDisplayed().get(arrayIndex));
-				}
+			int arrayIndex = list.getSelectedIndex();
+			if(arrayIndex != -1){
+				new ViewEntryWindow(mainWindowBackend.getEntriesCurrentlyDisplayed().get(arrayIndex));
+			}
 		});
 		
 		JSeparator separator = new JSeparator();
@@ -157,7 +155,7 @@ public class MainWindow {
 		JMenuItem menuItemAddEntry = new JMenuItem("Add Entry");
 		mnFile.add(menuItemAddEntry);
 		menuItemAddEntry.addActionListener(e -> {
-				new AddEntryWindow();
+			new AddEntryWindow();
 		});
 		
 		JMenuItem mntmEditEntry = new JMenuItem("Edit Entry");
@@ -166,9 +164,9 @@ public class MainWindow {
 		JMenuItem mntmRemoveEntry = new JMenuItem("Remove Entry");
 		mnFile.add(mntmRemoveEntry);
 		mntmRemoveEntry.addActionListener(e -> {
-				if(list.getSelectedValue() != null) {
-					mainWindowBackend.removeEntry(list.getSelectedValue());
-				}
+			if(list.getSelectedValue() != null) {
+				mainWindowBackend.removeEntry(list.getSelectedValue());
+			}
 		});
 		
 		JMenu mnHelp = new JMenu("Help");
@@ -177,11 +175,11 @@ public class MainWindow {
 		JMenuItem mntmHelp = new JMenuItem("Help...");
 		mnHelp.add(mntmHelp);
 		mntmHelp.addActionListener(e -> {
-				JOptionPane.showMessageDialog(null, "To add an entry, click the 'Add Entry' button"
-						+ " and enter the relevant information.\nTo edit an existing entry, select"
-						+ " the entry that is in the main window, and click the 'Edit Entry' button."
-						+ "\nTo remove an entry, select the entry that you want to remove and click"
-						+ " the 'Remove Entry' button.");
+			JOptionPane.showMessageDialog(null, "To add an entry, click the 'Add Entry' button"
+					+ " and enter the relevant information.\nTo edit an existing entry, select"
+					+ " the entry that is in the main window, and click the 'Edit Entry' button."
+					+ "\nTo remove an entry, select the entry that you want to remove and click"
+					+ " the 'Remove Entry' button.");
 		});
 	}
 	

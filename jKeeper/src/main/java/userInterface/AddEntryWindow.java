@@ -3,8 +3,6 @@ package userInterface;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -84,21 +82,21 @@ public class AddEntryWindow extends JFrame {
 		btnComputer.setBounds(299, 88, 98, 23);
 		contentPane.add(btnComputer);
 		btnComputer.addActionListener(e -> {
-				btnCreditCard.setVisible(false);
-				btnComputer.setVisible(false);
-				btnLogin.setVisible(false);
-				lblSelectANew.setVisible(false);
-				showSimpleUI("Computer");
+			btnCreditCard.setVisible(false);
+			btnComputer.setVisible(false);
+			btnLogin.setVisible(false);
+			lblSelectANew.setVisible(false);
+			showSimpleUI("Computer");
 		});
 		
 		btnLogin.setBounds(52, 88, 98, 23);
 		contentPane.add(btnLogin);
 		btnLogin.addActionListener(e -> {
-				btnCreditCard.setVisible(false);
-				btnComputer.setVisible(false);
-				btnLogin.setVisible(false);
-				lblSelectANew.setVisible(false);
-				showSimpleUI("Login");
+			btnCreditCard.setVisible(false);
+			btnComputer.setVisible(false);
+			btnLogin.setVisible(false);
+			lblSelectANew.setVisible(false);
+			showSimpleUI("Login");
 		});
 		
 		final JLabel lblAddNewEntry = new JLabel("Add New Entry");
@@ -178,18 +176,18 @@ public class AddEntryWindow extends JFrame {
 		
 		if(type.equals("Login")) {
 			btnAddEntry.addActionListener(e -> {
-					LoginEntry loginEntry = new LoginEntry(txtEntryName.getText(), txtEntryUsername.getText(),
-							txtEntryPassword.getText(), txtEntryURL.getText(), txtEntryEmail.getText());
-					new EntryXMLWriter().writeLoginEntryToFile(loginEntry);
-					dispose();
+				LoginEntry loginEntry = new LoginEntry(txtEntryName.getText(), txtEntryUsername.getText(),
+						txtEntryPassword.getText(), txtEntryURL.getText(), txtEntryEmail.getText());
+				EntryXMLWriter.getInstance().writeLoginEntryToFile(loginEntry);
+				dispose();
 			});
 		}
 		else if(type.equals("Computer")) {
 			btnAddEntry.addActionListener(e -> {
-					ComputerEntry computerEntry = new ComputerEntry(txtEntryName.getText(), txtEntryUsername.getText(),
-							txtEntryPassword.getText(), txtEntryURL.getText(), txtEntryEmail.getText());
-					new EntryXMLWriter().writeComputerEntryToFile(computerEntry);
-					dispose();
+				ComputerEntry computerEntry = new ComputerEntry(txtEntryName.getText(), txtEntryUsername.getText(),
+						txtEntryPassword.getText(), txtEntryURL.getText(), txtEntryEmail.getText());
+				EntryXMLWriter.getInstance().writeComputerEntryToFile(computerEntry);
+				dispose();
 			});
 		}
 		
@@ -286,12 +284,12 @@ public class AddEntryWindow extends JFrame {
 		// Create a new CreditCardEntry and write it to the userData.xml file
 		JButton btnAddEntry = new JButton("Add Entry");
 		btnAddEntry.addActionListener(e -> {
-				CreditCardEntry cce = new CreditCardEntry(txtEntryName.getText(), txtEntryUsername.getText(),
-						txtEntryPassword.getText(), txtEntryURL.getText(), txtEntryEmail.getText(),
-						txtEntryCCNumber.getText(), txtEntryExpiration.getText(), 
-						txtEntrySecurityCode.getText());
-				new EntryXMLWriter().writeCreditCardEntryToFile(cce);
-				dispose();
+			CreditCardEntry cce = new CreditCardEntry(txtEntryName.getText(), txtEntryUsername.getText(),
+					txtEntryPassword.getText(), txtEntryURL.getText(), txtEntryEmail.getText(),
+					txtEntryCCNumber.getText(), txtEntryExpiration.getText(), 
+					txtEntrySecurityCode.getText());
+			EntryXMLWriter.getInstance().writeCreditCardEntryToFile(cce);
+			dispose();
 		});
 		btnAddEntry.setBounds(177, 327, 89, 23);
 		contentPane.add(btnAddEntry);

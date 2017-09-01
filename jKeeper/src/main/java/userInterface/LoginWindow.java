@@ -8,8 +8,6 @@ import javax.swing.JOptionPane;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 import javax.swing.SwingConstants;
 
@@ -94,20 +92,20 @@ public class LoginWindow {
 		
 		// Prompt the user for their login password
 		btnLogin.addActionListener(e -> {
-				if(pwdPasswordField.getPassword().length == 0){
-					JOptionPane.showMessageDialog(null, "Please enter your password.");
+			if(pwdPasswordField.getPassword().length == 0){
+				JOptionPane.showMessageDialog(null, "Please enter your password.");
+			}
+			else {
+				// If logged in successfully, hide this window and open the manager
+				if(loginBackend.login(pwdPasswordField.getPassword())) {
+					frmJkeeperPasswordManager.setVisible(false);
+					new MainWindow();
 				}
+				// If login fails, display an error message
 				else {
-					// If logged in successfully, hide this window and open the manager
-					if(loginBackend.login(pwdPasswordField.getPassword())) {
-						frmJkeeperPasswordManager.setVisible(false);
-						new MainWindow();
-					}
-					// If login fails, display an error message
-					else {
-						JOptionPane.showMessageDialog(null, "Incorrect password. Please try again.");
-					}
+					JOptionPane.showMessageDialog(null, "Incorrect password. Please try again.");
 				}
+			}
 		});
 	}
 }

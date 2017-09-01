@@ -15,12 +15,12 @@ import javax.xml.transform.stream.*;
 import org.w3c.dom.*;
 
 /**
- * Class is used for writing new entries to the userData.xml file
+ * Class is used for writing new entries to the userData.xml file. Used by using static factory method .getInstance()
  * 
  * @author Ryan Caldwell
  * @version Version 1.0, 28-AUG-2017
  */
-public class EntryXMLWriter {
+public final class EntryXMLWriter {
 
 	// File containing the user's entry data
 	private File userFile;
@@ -30,11 +30,18 @@ public class EntryXMLWriter {
 	private DocumentBuilderFactory dbf;
 	// The index of the root element; this has new child nodes (entries) appended to it
 	private final int ROOT_ELEMENT_INDEX = 0;
+	// Instance of EntryXMLWriter
+	private static final EntryXMLWriter INSTANCE;
+	
+	// Instantiate an instance of EntryXMLWriter
+	static {
+		INSTANCE = new EntryXMLWriter();
+	}
 	
 	/**
 	 * Takes a BasicEntry as a parameter to write to the userData.xml file
 	 */
-	public EntryXMLWriter() {
+	private EntryXMLWriter() {
 		userFile = new File(System.getenv("APPDATA") + "/jKeeper/userData.xml");
 	}
 	
@@ -43,7 +50,7 @@ public class EntryXMLWriter {
 	 * 
 	 * @param newEntry A LoginEntry to be written to the userData.xml file
 	 */
-	public void writeLoginEntryToFile(LoginEntry newEntry) {
+	public final void writeLoginEntryToFile(LoginEntry newEntry) {
 		if(newEntry.getClass() != LoginEntry.class){
 			System.err.println("Error: Not a LoginEntry.");
 		}
@@ -58,7 +65,7 @@ public class EntryXMLWriter {
 	 * @param entryName The name of the entry that will be removed
 	 * @return Returns true if the entry was successfully found and removed, false otherwise.
 	 */
-	public boolean removeEntryFromXML(String entryName) {
+	public final boolean removeEntryFromXML(String entryName) {
 		Document dom;
 	    boolean foundNode = false;
 	    this.dbf = DocumentBuilderFactory.newInstance();
@@ -96,7 +103,7 @@ public class EntryXMLWriter {
 	 * 
 	 * @param newEntry A ComputerEntry to be written to the userData.xml file
 	 */
-	public void writeComputerEntryToFile(ComputerEntry newEntry) {
+	public final void writeComputerEntryToFile(ComputerEntry newEntry) {
 		if(newEntry.getClass() != ComputerEntry.class){
 			System.err.println("Error: Not a ComputerEntry.");
 		}
@@ -106,7 +113,7 @@ public class EntryXMLWriter {
 	}
 	
 	// Writes the type, name, username, password, URL, and email to the file
-	private void writeDefaults(BasicEntry newEntry) {
+	private final void writeDefaults(BasicEntry newEntry) {
 		Document dom;
 	    
 	    this.dbf = DocumentBuilderFactory.newInstance();
@@ -153,7 +160,7 @@ public class EntryXMLWriter {
 	 * 
 	 * @param newEntry A CreditCardEntry to be written to the userData.xml file
 	 */
-	public void writeCreditCardEntryToFile(CreditCardEntry newEntry) {
+	public final void writeCreditCardEntryToFile(CreditCardEntry newEntry) {
 		if(newEntry.getClass() != CreditCardEntry.class){
 			System.err.println("Error: Not a CreditCardEntry.");
 		}
@@ -209,10 +216,19 @@ public class EntryXMLWriter {
 		}
 	}
 	
+	/**
+	 * Static factory method used for accessing the public methods of the EntryXMLWriter class
+	 * 
+	 * @return Returns an instance of the EntryXMLWriter class
+	 */
+	public static final EntryXMLWriter getInstance() {
+		return INSTANCE;
+	}
+	
 	// Writes the Document to the user's userData.xml file
 	// 
 	// @param dom The document that will be written back to the userData.xml file
-	private void writeToFile(Document dom) {
+	private final void writeToFile(Document dom) {
 		FileOutputStream fos = null;
 		
 		try {
