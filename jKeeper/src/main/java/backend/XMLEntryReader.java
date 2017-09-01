@@ -22,7 +22,7 @@ import entries.LoginEntry;
  * @author Ryan Caldwell
  * @version Version 1.0, 18-AUG-2017
  */
-public class XMLEntryReader {
+public final class XMLEntryReader {
 
 	// ArrayList of BasicEntry's from the userData.xml file
 	private ArrayList<BasicEntry> allEntries;

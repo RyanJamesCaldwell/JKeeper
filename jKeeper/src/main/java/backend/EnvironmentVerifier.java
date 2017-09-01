@@ -14,7 +14,7 @@ import javax.swing.JOptionPane;
  * @author Ryan Caldwell
  * @version Version 1.0, 9-AUG-2017
  */
-public class EnvironmentVerifier {
+public final class EnvironmentVerifier {
 	
 	// User's account profile
 	private File userProfile;
@@ -22,11 +22,17 @@ public class EnvironmentVerifier {
 	private File appDataFolder;
 	// PrintWriter for writing to the user's account file
 	private PrintWriter fileWriter;
+	// Instance used for accessing EnvironmentVerifier methods
+	public static final EnvironmentVerifier INSTANCE;
+	
+	static {
+		INSTANCE = new EnvironmentVerifier();
+	}
 	
 	/**
 	 * Creates the files for the AppData folder and the jKeeper folder
 	 */
-	public EnvironmentVerifier() {
+	private EnvironmentVerifier() {
 		this.appDataFolder = new File(System.getenv("APPDATA"));
 		this.userProfile = new File(System.getenv("APPDATA") + "/jKeeper/UserProfile.csv");
 	}
@@ -63,6 +69,15 @@ public class EnvironmentVerifier {
 		} catch (IOException e) {
 			System.err.println("Error creating user profile.");
 		}
+	}
+	
+	/**
+	 * Static factory method for accessing the methods in EnvironmentVerifier
+	 * 
+	 * @return Returns an instance of EnvironmentVerifier
+	 */
+	public static final EnvironmentVerifier getInstance() {
+		return INSTANCE;
 	}
 
 	/**

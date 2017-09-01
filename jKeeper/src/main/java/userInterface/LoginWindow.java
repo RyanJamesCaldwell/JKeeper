@@ -1,6 +1,5 @@
 package userInterface;
 
-
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -23,7 +22,6 @@ import javax.swing.JPasswordField;
  * 
  * @author Ryan Caldwell
  * @version Version 1.0, 9-AUG-2017
- *
  */
 public class LoginWindow {
 
@@ -33,9 +31,7 @@ public class LoginWindow {
 	private JPasswordField pwdPasswordField;
 	// Backend login processes
 	private LoginBackend loginBackend;
-	// Verifies the environment and dependencies
-	private EnvironmentVerifier environmentVerifier;
-
+	
 	/**
 	 * Verify that the user has an AppData folder. If they do not, close the program.
 	 * If they do and initial account setup is needed, generate the user's profile. 
@@ -43,14 +39,13 @@ public class LoginWindow {
 	 */
 	public LoginWindow() {
 		this.frmJkeeperPasswordManager = new JFrame();
-		this.environmentVerifier = new EnvironmentVerifier();
 		
-		if(this.environmentVerifier.correctOS()) {
-			if(!this.environmentVerifier.hasUserProfile()){
-				this.environmentVerifier.setupEnvironment();
-				this.environmentVerifier.generateInitialProfile();
+		if(EnvironmentVerifier.getInstance().correctOS()) {
+			if(!EnvironmentVerifier.getInstance().hasUserProfile()){
+				EnvironmentVerifier.getInstance().setupEnvironment();
+				EnvironmentVerifier.getInstance().generateInitialProfile();
 			}
-			initialize();
+			this.initialize();
 			this.frmJkeeperPasswordManager.setVisible(true);
 		}
 		else {
