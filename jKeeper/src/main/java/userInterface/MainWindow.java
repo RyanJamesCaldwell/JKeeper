@@ -10,6 +10,9 @@ import javax.swing.JOptionPane;
 
 import backend.MainWindowBackend;
 import entries.BasicEntry;
+import entries.ComputerEntry;
+import entries.CreditCardEntry;
+import entries.LoginEntry;
 
 import javax.swing.JScrollPane;
 import javax.swing.JList;
@@ -138,7 +141,18 @@ public class MainWindow {
 		btnViewEntry.addActionListener(e -> {
 			int arrayIndex = list.getSelectedIndex();
 			if(arrayIndex != -1){
-				new ViewEntryWindow(mainWindowBackend.getEntriesCurrentlyDisplayed().get(arrayIndex));
+				BasicEntry elementToView = mainWindowBackend.getEntriesCurrentlyDisplayed().get(arrayIndex);
+				Class<?> classType = elementToView.getClass();
+				
+				if(classType == LoginEntry.class) {
+					new ViewEntryWindow<LoginEntry>((LoginEntry) elementToView);
+				}
+				else if(classType == ComputerEntry.class) {
+					new ViewEntryWindow<ComputerEntry>((ComputerEntry) elementToView);
+				}
+				else if(classType == CreditCardEntry.class) {
+					new ViewEntryWindow<CreditCardEntry>((CreditCardEntry) elementToView);
+				}
 			}
 		});
 		

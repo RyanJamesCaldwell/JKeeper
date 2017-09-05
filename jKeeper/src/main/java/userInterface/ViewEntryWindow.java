@@ -22,14 +22,14 @@ import java.awt.Toolkit;
  * @author Ryan Caldwell
  * @version Version 1.0, 14-AUG-2017
  */
-public class ViewEntryWindow extends JFrame {
+public class ViewEntryWindow<E extends BasicEntry> extends JFrame {
 
 	private static final long serialVersionUID = 4948005554005458345L;
 	// Content pane to be added to 
 	private JPanel contentPane;
 	// Entry that is to be viewed in the JFrame window
-	private BasicEntry entryToView;
-	// Class that the entry is, helps determine which setup call to use
+	private E entryToView;
+	// The type of entry being displayed
 	private Class<?> entryType;
 	
 	/**
@@ -55,17 +55,22 @@ public class ViewEntryWindow extends JFrame {
 	/**
 	 * Create the frame, determines how the UI is set up (which entry is being viewed), and displays to user
 	 */
-	public ViewEntryWindow(BasicEntry entryToView) {
+	public ViewEntryWindow(E entryToView) {
 		this.entryToView = entryToView;
-		this.entryType = entryToView.getClass();
+		this.entryType = this.entryToView.getClass();
 		getContentPane().setLayout(null);
 		setResizable(false);
 		setupInitialUI();
 		determineUIType();
+		centerWindow();
+	}
+	
+	// Sets the location of the window to the center of the screen
+	private void centerWindow() {
 		Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
 		setLocation(dim.width/2-getSize().width/2, dim.height/2-getSize().height/2);
 	}
-	
+
 	/**
 	 * Sets up UI aspects that are common to all entries
 	 */
@@ -81,7 +86,6 @@ public class ViewEntryWindow extends JFrame {
 	 * Determines the type of UI that needs to be initialized based on the entry type
 	 */
 	private void determineUIType() {
-		
 		if(this.entryType == LoginEntry.class) {
 			initializeUIForLogin();
 		}
