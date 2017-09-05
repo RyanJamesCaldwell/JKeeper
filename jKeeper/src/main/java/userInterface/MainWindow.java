@@ -44,12 +44,6 @@ public class MainWindow {
 	private MainWindowBackend mainWindowBackend;
 	// The item list where the names of user entries will be held
 	private DefaultListModel<String> itemList;
-	// The LoginEntry that will be viewed
-	private LoginEntry viewLoginEntryElement;
-	// The ComputerEntry that will be viewed
-	private ComputerEntry viewComputerEntryElement;
-	// The CreditCardEntry that will be viewed
-	private CreditCardEntry viewCreditCardEntryElement;
 	// Used for searching entry type "login"
 	public static final int ENTRY_TYPE_LOGIN = 0;
 	// Used for searching entry type "computer"
@@ -152,15 +146,15 @@ public class MainWindow {
 				
 				// Create new ViewEntryWindow
 				if(classType == LoginEntry.class) {
-					this.viewLoginEntryElement = (LoginEntry) elementToView;
-					new ViewEntryWindow<LoginEntry>(this.viewLoginEntryElement);
+					LoginEntry viewLoginEntryElement = (LoginEntry) elementToView;
+					new ViewEntryWindow<LoginEntry>(viewLoginEntryElement);
 				}
 				else if(classType == ComputerEntry.class) {
-					this.viewComputerEntryElement = (ComputerEntry) elementToView;
-					new ViewEntryWindow<ComputerEntry>(this.viewComputerEntryElement);
+					ComputerEntry viewComputerEntryElement = (ComputerEntry) elementToView;
+					new ViewEntryWindow<ComputerEntry>(viewComputerEntryElement);
 				}
 				else if(classType == CreditCardEntry.class) {
-					this.viewCreditCardEntryElement = (CreditCardEntry) elementToView;
+					CreditCardEntry viewCreditCardEntryElement = (CreditCardEntry) elementToView;
 					new ViewEntryWindow<CreditCardEntry>(viewCreditCardEntryElement);
 				}
 			}
