@@ -45,13 +45,13 @@ public class MainWindow {
 	// The item list where the names of user entries will be held
 	private DefaultListModel<String> itemList;
 	// Used for searching entry type "login"
-	public static final int ENTRY_TYPE_LOGIN = 0;
+	private static final int ENTRY_TYPE_LOGIN = 0;
 	// Used for searching entry type "computer"
-	public static final int ENTRY_TYPE_COMPUTER = 1;
+	private static final int ENTRY_TYPE_COMPUTER = 1;
 	// Used for searching entry type "credit card"
-	public static final int ENTRY_TYPE_CREDIT_CARD = 2;
+	private static final int ENTRY_TYPE_CREDIT_CARD = 2;
 	// Used for retrieving all entry types
-	public static final int ENTRY_TYPE_ALL = 3;
+	private static final int ENTRY_TYPE_ALL = 3;
 
 	/**
 	 * Initializes the user interface and sets the visibility of the window to "true"
